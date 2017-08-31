@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd ">
+
+	<http pattern="/index.jsp*" security="none" />
+	<http pattern="/manage*" security="none" />
+	<http pattern="/action/manage/login*" security="none" />
+	<http pattern="/**/images/**" security="none" />
+	<http pattern="/**/css/**" security="none" />
+	<http pattern="/**/js/**" security="none" />
+	<http pattern="/**/component/**" security="none" />
+	<http pattern="/**/resources/**" security="none" />
+    <http pattern="/ueditor*" security="none" />
+    
+	<http auto-config="true">
+		
+		<custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"/>
+		
+		<form-login login-page="/action/manage/login" username-parameter="loginId" password-parameter="password" 
+			authentication-failure-url="/action/manage/login?error=true" 
+			default-target-url="/action/manage/main"/>
+			
+		<session-management invalid-session-url="/action/manage/accesscontrol/sessioninvalid">
+			<concurrency-control max-sessions="2" error-if-maximum-exceeded="false" />
+		</session-management>
+		
+		<logout logout-success-url="/action/manage/login" />
+	</http>
+	
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailService">
+			<password-encoder ref="MD5Encoder"/>
+		</authentication-provider>
+	</authentication-manager>
+	
+	<beans:bean id="filterSecurityInterceptor" class="com.menksoft.cms.application.security.config.FilterSecurityInterceptor">
+		<beans:property name="securityMetadataSource" ref="securityMetadataSource" />
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="accessDecisionManager" ref="accessDecisionManager" />
+	</beans:bean>
+	
+	<beans:bean id="securityMetadataSource" class="com.menksoft.cms.application.security.config.SecurityMetadataSource">
+		<beans:property name="resourceService" ref="resourceService" />
+	</beans:bean>
+	<beans:bean id="userDetailService" class="com.menksoft.cms.application.security.config.UserDetailService">
+		<beans:property name="userService" ref="userService" />
+	</beans:bean>
+	<beans:bean id="accessDecisionManager" class="com.menksoft.cms.application.security.config.AccessDecisionManager" />
+	<beans:bean id="MD5Encoder" class="com.menksoft.util.MD5Encoder" />
+	
+	
+</beans:beans>
