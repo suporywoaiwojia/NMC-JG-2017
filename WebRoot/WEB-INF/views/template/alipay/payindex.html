@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/reveal.css">
+<link rel="stylesheet" type="text/css" href="../css/r_p_main.css">
+
+<script type="text/javascript" src="../js/RegExpValidata.js"></script>
+<script type="text/javascript" src="../js/jquery.reveal.js"></script>
+<script type="text/javascript" src="../js/alipayindex.js"></script>
+<script type="text/javascript" src="${basePath}js/validate.js"></script>
+<script type="text/javascript">
+//价格 缴费名称 缴费月份 缴费类型ID
+var a="${flag}";
+
+	function pay_over(){
+	
+		$('#alipayment').attr("action","r_pay_over");
+		$('#alipayment').attr("target","_self");
+
+		$('#alipayment').submit();
+
+	}
+
+</script>
+<title>会员缴费-草原文化数字化创意资源平台</title>
+
+</head>
+<body >
+[#include "/header.html"]
+<div class="wrap zhifubox">
+	<div class="zhifubox2">
+		<div class="zhifuhead">
+			<div class="zhifutab zhifuhead1 current" data-for="jicheng">
+				<h3>集成产品会员</h3>
+				<p>可以再规定时间内浏览相对应的集成产品</p>
+			</div>
+			<div class="zhifutab zhifuhead2" data-for="sucai">
+				<h3>素材类会员</h3>
+				<p>可获得一定数额的积分 使用积分下载素材</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="zhifucont jicheng current">
+			<div class="jiagebox">
+				<ul>
+				[#list dbh_list as l]
+					<li class="taocan" data-sid="${l.id}"  onclick="pay('${l.disprice}','${l.name}','${l.month}','${l.id}')">
+						<div class="zhekou">
+							<span class="babylon5">${l.discount}</span>
+							<span class="zhezi">[#if l.discount!=""]折[#else]全价[/#if]</span>
+						</div>
+						<div class="shijian">
+							<span class="fs36">${l.month}</span>
+							<span class="fs18">个月</span>
+						</div>
+						<div class="price">
+							<div class="oldP">原价：${l.price}元</div>
+							<div class="newP">现价：${l.disprice}元</div>
+						</div>
+                        <div class="clear"></div>
+					</li>
+				[/#list]
+					
+				
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="zhifucont sucai">
+			<div class="sucaibox">
+				<ul>
+					<li class="sucaitaocan" data-sid="S10" onclick="pay('10.00','素材','','S10')">充值<span class="cf86400"> 10 </span>元</li>
+					<li class="sucaitaocan" data-sid="S20" onclick="pay('20.00','素材','','S20')">充值<span class="cf86400"> 20 </span>元</li>
+					<li class="sucaitaocan" data-sid="S30" onclick="pay('30.00','素材','','S30')">充值<span class="cf86400"> 30 </span>元</li>
+					<li class="sucaitaocan" data-sid="S50" onclick="pay('50.00','素材','','S50')">充值<span class="cf86400"> 50 </span>元</li>
+					<li class="sucaitaocan" data-sid="S100" onclick="pay('100.00','素材','','S100')">充值<span class="cf86400"> 100 </span>元</li>
+					<li class="sucaitaocan" data-sid="S200" onclick="pay('200.00','素材','','S200')">充值<span class="cf86400"> 200 </span>元</li>
+					<li class="sucaitaocan" data-sid="S300" onclick="pay('300.00','素材','','S300')">充值<span class="cf86400"> 300 </span>元</li>
+					<li class="sucaitaocan" data-sid="S500" onclick="pay('500.00','素材','','S500')">充值<span class="cf86400"> 500 </span>元</li>
+					<li class="sucaitaocan" data-sid="S1000" onclick="pay('1000.00','素材','','S1000')">充值<span class="cf86400"> 1000 </span>元</li>
+					<li class="sucaitaocan" data-sid="S2000" onclick="pay('2000.00','素材','','S2000')">充值<span class="cf86400"> 2000 </span>元</li>
+					<li class="sucaitaocan qitajine"  data-sid="qita">其他金额<input type="text" class="qitajineinput" id="other">元</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="zhifuiframe">
+			<div class="zhifuiframein">
+				<div class="zfhead">
+					<h3 class="fleft">支付方式：</h3>
+					<ul class="fleft zffangshi">
+						<!--<li class="fleft"><a href="javascript:;" data-target="zfkuaijie">快捷支付</a></li>-->
+						<li class="fleft"><a href="javascript:;" data-target="zfwangyin" class="current">银行卡支付</a></li>
+						<!--<<li class="fleft"><a href="javascript:;" data-target="zfweixin">微信支付</a></li>
+						<li class="fleft"><a href="javascript:;" data-target="zfhuafei">手机话费支付</a></li>-->
+					</ul>
+					<div class="clear"></div>
+				</div>
+				<div class="zfcont" id="zfkuaijie" style="display:none;"><h3>请选择快捷支付方式！</h3></div>
+				<div class="zfcont" id="zfweixin" style="display:none;"><h3>请选择微信支付方式！</h3></div>
+				<div class="zfcont" id="zfhuafei" style="display:none;"><h3>请选择手机话费支付方式！</h3></div>
+				<div class="zfcont" id="zfwangyin">
+					
+					<h3>第三方支付平台 <span class="c999f12">使用第三方支付账户付款</span></h3>
+					<ul class="disanfang">
+						<li class="fleft"><a href="javascript:;" class="notext zhifubao checked" id="zhifubaoa">支付宝</a></li>
+						<!--<li class="fleft"><a href="javascript:;" class="notext caifutong">财付通</a></li> -->
+					</ul>
+					<div class="clear"></div>
+					<h3>网银银行支付 <span class="c999f12">建议您使用IE浏览器。需在银行开通网银，且支付有金额限额</span></h3>
+					<ul class="wangyin" id="wangyinul">
+						<li class="fleft"><a href="javascript:;" class="notext zhaohang" data-wyid="CMB-DEBIT">招商银行</a></li>
+						<li class="fleft"><a href="javascript:;" class="notext gonghang" data-wyid="ICBC-DEBIT">中国工商银行</a></li>
+						<li class="fleft"><a href="javascript:;" class="notext zhonghang" data-wyid="BOC-DEBIT">中国银行</a></li>
+						<li class="fleft"><a href="javascript:;" class="notext jianhang" data-wyid="CCB-DEBIT">中国建设银行</a></li>
+						<li class="fleft hide"><a href="javascript:;" class="notext guangda" data-wyid="CEB-DEBIT">光大银行</a></li>
+						<li class="fleft hide"><a href="javascript:;" class="notext nonghang" data-wyid="ABC">中国农业银行</a></li>
+						<li class="fleft hide"><a href="javascript:;" class="notext minsheng" data-wyid="CMBC">中国民生银行</a></li>
+						<li class="fleft hide"><a href="javascript:;" class="notext jiaohang" data-wyid="COMM-DEBIT">中国交通银行</a></li>
+						<li class="fleft hide"><a href="javascript:;" class="notext youzheng" data-wyid="PSBC-DEBIT">中国邮政储蓄</a></li>
+						<li class="fleft hide"><a href="javascript:;" class="notext pufa" data-wyid="SPDB-DEBIT">浦东发展银行</a></li>
+						<li class="fleft hide"><a href="javascript:;" class="notext zhongxin" data-wyid="CITIC">中信实业银行</a></li>
+					</ul>
+					<div class="clear"></div>
+					<a href="javascript:;" class="moreyinhang" id="moreyinhang">更多银行</a>
+					<a href="javascript:;" class="otheryinhang hide" id="otheryinhang">选择其他银行</a>
+					<div class="clear"></div>
+				</div>
+				<div class="zfjine">
+					<div class="zfjineL fleft">
+						<ul>
+							<li>商品金额：<label id="price_j">0.00</label> 元</li>
+							<!--<li>优惠：-1080.00 元</li> -->
+							<li>应付总额：<span class="cfd6c01" id="price_pay">0.00</span> 元</li>
+						</ul>
+						<a href="javascript:;" class="btna big-link" id="querenkaitong">确认开通</a>
+						
+					</div>
+					<h3 id="warnmes" style="color:#f11;margin-top:95px; text-indent:25px; font-weight:100;"></h3>
+					<!--<div class="zfjineR fright">
+						<div>
+							<span>代金劵：</span>
+							<input type="text">
+							<a href="#" class="btna btnasmall">兑换</a>
+						</div>
+						<p>一次支付只能使用一张，可抵扣对应金额，余额不退。</p>
+					</div> -->
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+ <form name=alipayment id="alipayment" action="anda_pay_sub" method="post" target="_blank">
+ <input  id="price" name="price" type="hidden" />
+<input type="hidden"  name="pid" id="pid" />
+ <input  id="paymentName" name="paymentName" type="hidden" />
+ <input  id="disprice" name="disprice" type="hidden"/>
+ <input  id="paymentMonth" name="paymentMonth" type="hidden" />
+ <input  id="memberid" name="memberid" type="hidden" value="${memberid}" />
+ <input  id="bankcode" name="bankcode" type="hidden"/>
+ </form>
+
+<div class="wrap guanggao">
+	[@dbh_ad id='767']<img src="${filePath}" width="980px" height="100px" />[/@dbh_ad]
+</div>
+
+<a href="javascript:;" data-reveal-id="myModal" id="showMyModal" style="display:none;"></a>
+<div id="myModal" class="reveal-modal">
+	<h3>请您在新打开的网上银行页面进行支付，支付完成前请不要关闭该窗口</h3>
+	<a href="javascript:;" class="btna fleft" style="margin-left:100px; margin-right:30px;" id="pay_over" onClick="pay_over()">已完成支付</a>
+	<a href="https://cshall.alipay.com/hall/index.htm" class="btna fleft" style="">支付遇到问题</a>
+</div>
+
+</body>
+
+<script type="text/javascript" src="../../../js/login.js"></script>
+[#include "/footer.html"]
+ </html>

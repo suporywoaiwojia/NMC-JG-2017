@@ -1,0 +1,94 @@
+[@dbh_content]
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>安达视频课件</title>
+    <link type="text/css" rel="stylesheet" href="../../wap/styles/css/global.css" />
+    <link type="text/css" rel="stylesheet" href="../../wap/styles/css/wapStyle.css" />
+    <link href="../../wap/videoplayer/video-js.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="${basePath}wap/javascript/wapInfo.js"></script>
+        <script type="text/javascript" src="${basePath}js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="${basePath}js/login.js"></script>
+        <title>[@dbh_website]${webName}[/@dbh_website]</title>
+        <script type="text/javascript">
+	
+			$(document).ready(function(){			
+				var displayInfo="unshow";				
+				$("#HomeButton").click(function(){
+					if(displayInfo=="unshow"){						
+						$("#homeMenuBox").slideDown(1000);
+						displayInfo="show";
+					}
+					else
+					{
+						$("#homeMenuBox").slideUp(1000);
+						displayInfo="unshow";
+					}
+				});	
+				
+				
+				$("#exitLink").click(function(){
+					
+						$("#homeMenuBox").slideUp(1000);
+						displayInfo="unshow";
+					
+				});		
+				
+		    })
+			
+        </script>
+    <!-- LOAD VIDEO.JS SOURCE FILES IN ORDER -->
+    <script src="../../wap/videoplayer/source-loader.js"></script>
+    ${pageView}
+</head>
+<body  onload="setWidth();">
+	 <div class="contentBox">
+        
+        	<!--  顶部页面的引用  START -->
+			[#include "/wap_header.html"]
+			<!--  顶部页面的引用  END -->
+	</div>
+    <video id="vid1" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="480" poster="http://video-js.zencoder.com/oceans-clip.png" style="margin-top:210px;">
+    	<source src="${media.filePath}.flv" type='video/mp4'>
+
+    	<p>Video Playback Not Supported</p>
+    </video>
+
+  <script>
+    (function() {
+      var vid1, progressed;
+
+      // create a really simple plugin
+      // this one just logs the buffered percentage to the console whenever
+      // more data is downloaded
+      progressed = function(options) {
+        this.on('progress', function(e) {
+          console.log(this.bufferedPercent());
+        });
+      };
+
+      // register the plugin
+      vjs.plugin('progressed', progressed);
+
+      // initialize it
+      vid1 = vjs('vid1');
+      vid1.progressed();
+    })();
+  </script>
+  
+  
+		<div class="homeMenu" id="homeMenuBox">
+        	[@dbh_channel id=62]
+        	<a href="${wapurl}" target="_top"><div class="indexLink"></div></a>
+        	[/@dbh_channel]
+        	<a href="javascript:void(0);" id="linkwap" class="signinwap"><div class="loginLink"></div></a>
+        	<div class="exitLink" id="exitLink"></div>
+        </div>
+        <div class="HomeButton" id="HomeButton"></div>
+        
+        
+</body>
+</html>
+[/@dbh_content]

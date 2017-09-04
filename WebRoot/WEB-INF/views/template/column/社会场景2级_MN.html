@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>草原文化数字化创意资源平台</title>
+<style type="text/css">
+  @font-face {
+    font-family: Menksoft2007;
+	font-style:  normal;
+    font-weight: normal;
+    src:url("${basePath}mongol/Menksoft2007.woff") format("woff");
+	}
+</style>
+<link type="text/css" href="${basePath}css/mn/styles.css" rel="stylesheet" />
+<base target="_blank" />
+</head>
+<body>
+<!--统一头部开始-->
+<!--标头区-->
+[#include "/mn/header_mn.html"]
+<!--统一头部结束-->
+<!--推荐位置开始-->
+[#assign type=6 /]	
+[#include "/mn/hdbanner_mn.html"]
+<!--内容开始-->
+
+[@dbh_channel_list parentid=6 var="rw" lg="mn"]
+<div class="content">
+
+  <div class="content-l">
+    <div class="mongol_write" style="font-family:Menksoft2007; font-size:18px; font-weight:bold; float:left; color:#013a66;">${rw.name}</div>
+  </div>
+
+ 
+  <div class="content-m">
+	[@dbh_content_list   channelId=rw.id count=6  orderBy=1 var='lsrw' lg='mn']
+    <div class="content-m-word">
+      <div class="mongol_write" style="font-family:Menksoft2007; font-size:12px; float:left;"><a href="#">${lsrw.title}</a></div>
+    </div>
+    <div class="content-m-img">
+      <a href="${url}"><img src="${lsrw.coverPath}" width="240px" height="160px" /></a>
+	  
+    </div>
+	[/@dbh_content_list]
+  </div>
+  <!--更多 -->
+	[@dbh_channel id=rw.id lg='mn']
+  <div class="content-r">
+    <div class="mongol_write" style="font-family:Menksoft2007; font-size:18px; font-weight:bold; float:left; color:#013a66;"><a href="${url}"> </a></div>
+  </div>
+[/@dbh_channel] 
+</div>
+
+<div class="k"></div>
+[/@dbh_channel_list]
+<!--内容结束-->
+
+<!--统一底部开始-->
+</div>
+[#include "/mn/footer_mn.html"]
+<!--统一底部结束-->
+</body>
+
+</html>

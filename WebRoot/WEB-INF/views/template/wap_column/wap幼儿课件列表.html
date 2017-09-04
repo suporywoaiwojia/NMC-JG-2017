@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link type="text/css" rel="stylesheet" href="${basePath}wap/styles/css/global.css" />
+        <link type="text/css" rel="stylesheet" href="${basePath}wap/styles/css/wapStyle.css" />
+        <script type="text/javascript" src="${basePath}wap/javascript/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="${basePath}wap/javascript/wapInfo.js"></script>
+        <script type="text/javascript" src="${basePath}js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="${basePath}wap/javascript/jquery.lazyload.js"></script>
+		<script type="text/javascript" src="${basePath}js/login.js"></script>
+        <title>[@dbh_website]${webName}[/@dbh_website]</title>
+        <script type="text/javascript">
+
+		 jQuery(document).ready(
+		
+		 function($){
+		
+		 $("img").lazyload({
+		
+		 placeholder : "${basePath}wap/style/images/grey.gif",
+		
+		 effect : "fadeIn"
+		
+		 });
+		
+		 });
+		
+		 </script>
+        <script type="text/javascript">
+	
+			$(document).ready(function(){			
+				var displayInfo="unshow";				
+				$("#HomeButton").click(function(){
+					if(displayInfo=="unshow"){						
+						$("#homeMenuBox").slideDown(1000);
+						displayInfo="show";
+					}
+					else
+					{
+						$("#homeMenuBox").slideUp(1000);
+						displayInfo="unshow";
+					}
+				});	
+				
+				
+				$("#exitLink").click(function(){
+					
+						$("#homeMenuBox").slideUp(1000);
+						displayInfo="unshow";
+					
+				});		
+				
+		    })
+			
+        </script>
+    </head>
+    
+    <body>
+
+                
+        <div id="pageBox" class="pageBox">
+        	<div id="imgBG" class="imgBG">
+            	<!--img src="${basePath}wap/styles/images/pageBG.png" /-->
+            </div>        	
+        </div>
+
+        <div class="contentBox">
+        
+        	<!--  顶部页面的引用  START -->
+			[#include "/wap_header.html"]
+			<!--  顶部页面的引用  END -->
+            
+            
+            <div id="cc" style="width:100%; height:600px;">
+            	[@dbh_slideshow  slideshowId=381 var='sd']
+                <a href="${url}"><img  src="${sd.httppath}" /></a>
+                [/@dbh_slideshow]           
+            </div>
+            
+            <script language="javascript">
+            	new $o.slide("cc",{color:'green',time:3});
+            </script>
+			
+            <div class="searchWapBox">
+                <div class="formBox">
+            		<input type="text" name="serachBox" id="serachBox" class="serachBox" />
+                    <div class="searchButton">
+                        <input type="submit" id="searchButton" name="searchButton" value=""/>
+                    </div>
+                </div>
+            </div>
+            
+            <ul class="labelTip">
+            
+				[@dbh_channel id=142]
+					<a href="${wapurl}" target="_top"><li class="yyLabelTips1"></li></a>
+				[/@dbh_channel]	
+				
+				
+				
+            </ul>
+			
+				[@dbh_content_page  var='dbhlist' ]
+				<ul class="courseVideoList">
+	            	<li class="courseImage">
+	                	<a href="${wapurl}" target="_blank"><img src="${dbhlist.coverPath}" width="100%" height="280" /></a>
+	                <li>  
+	            </ul>
+	            [/@dbh_content_page ]
+			
+            
+        </div>
+
+        
+        
+        <div class="homeMenu" id="homeMenuBox">
+        	[@dbh_channel id=62]
+        	<a href="${wapurl}" target="_top"><div class="indexLink"></div></a>
+        	[/@dbh_channel]
+        	<a href="javascript:void(0);" id="linkwap" class="signinwap"><div class="loginLink"></div></a>
+        	<div class="exitLink" id="exitLink"></div>
+        </div>
+        <div class="HomeButton" id="HomeButton"></div>
+    </body>
+</html>

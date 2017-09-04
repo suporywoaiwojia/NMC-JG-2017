@@ -1,0 +1,27 @@
+[@dbh_servlet scope="session" name="loginid" var='loginid']
+	[#if loginid!=""]
+			[@dbh_member id=loginid var="dd"]
+			
+<div class="usertx" style="width:120px;height:120px"><img src="${dd.image}" width="120px" height="120px" id="faceimg"/></div>
+<div class="usern" style="float:right;width:50px">
+
+	<span style="color:#FF6600" id="username">[#if dd.nickname?length lte 6] 
+				${dd.nickname}
+				[#else] 
+				${dd.nickname[0..6]}...[/#if] </span>
+	<span><br/><a onclick="loginoff()" href="#">[Quit]</a></span>
+</div>
+<!--<div class="userp">
+	<ul>
+		<li><a href="../member"  target="_blank">个人主页</a></li>
+		<li><a href="#">视频管理</a></li>
+		<li><a href="#">素材管理</a></li>
+		<li><a href="#">消息管理</a></li>
+		<li><a href="#">帐号管理</a></li>
+		<li><a href="#">充值中心</a></li>
+	</ul>
+</div>-->
+
+[/@dbh_member]
+[/#if]
+[/@dbh_servlet ]

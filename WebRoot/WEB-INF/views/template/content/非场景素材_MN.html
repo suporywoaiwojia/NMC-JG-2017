@@ -1,0 +1,75 @@
+[@dbh_content]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>草原文化数字化创意资源平台</title>
+<style type="text/css">
+  @font-face {
+    font-family: Menksoft2007;
+	font-style:  normal;
+    font-weight: normal;
+    src:url("${basePath}mongol/Menksoft2007.woff") format("woff");
+	}
+</style>
+<link type="text/css" href="${basePath}css/mn/styles.css" rel="stylesheet" />
+
+<base target="_self" />
+</head>
+<body>
+<!--统一头部开始-->
+<!--标头区-->
+[#include "/mn/header_mn.html"]
+<!--统一头部结束-->
+<!--介绍位置开始-->
+<div class="k"></div>
+<div class="profile">
+  <div class="preview">
+    <img src="${content.coverPath}" width="480px" height="300px">
+  </div>
+  [#list file as f]
+			[#if f_index==0]
+  <div class="info">
+    <li class="mongol_write" style="font-weight:bold; color:#013a66;"></li>
+    <li class="mongol_write">${content.title}</li>
+    <li class="mongol_write" style="font-weight:bold; color:#013a66;"></li>
+    <li class="mongol_write">${f.name}</li>
+    <li class="mongol_write" style="font-weight:bold; color:#013a66;"> </li>
+    <li class="mongol_write">${f.date}</li>
+  </div>
+  
+  <div class="download">
+    <li class="mongol_write" style="font-weight:bold; color:#013a66;"></li>
+    <li><a href="#" onclick="down('${f.id}')"><img src="${basePath}images/mn/dxxz.png" width="50" height="255" /></a></li>
+    <li><a href="#" onclick="down('${f.id}')"><img src="${basePath}images/mn/ltxz.png" width="50" height="255" /></a></li>
+  </div>
+  [/#if]
+	[/#list]
+  <div class="remark">
+    <span class="mongol_write">              <br />                <br />   ：</span>
+  </div>
+
+ <div class="share">
+   
+		<div class="bshare-custom icon-medium"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+						
+	</div>
+</div>
+<!--介绍位置结束-->
+<div class="fg"></div>
+<div class="k"></div>
+<!--评论开始-->
+[#if content.column.comments!=3]
+<iframe  id="comment"  width="100%" frameborder=0  allowtransparency="true" 
+							marginheight=0  marginwidth=0  scrolling="no"  style="z-index:9999;" src="${basePath}action/content/comment/mn/${content.id}"></iframe>
+[/#if]
+<!--评论结束-->
+<div class="k"></div>
+
+<!--统一底部开始-->
+[#include "/mn/footer_mn.html"]
+<!--统一底部结束-->
+</body>
+
+</html>
+[/@dbh_content]

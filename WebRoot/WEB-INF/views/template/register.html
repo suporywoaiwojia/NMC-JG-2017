@@ -1,0 +1,719 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+<title>草原文化数字化创意资源平台</title>
+
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+
+
+<link href="../css/areas/cityLayout.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../js/RegExpValidata.js"></script>
+<script type="text/javascript" src="../js/regedit_index.js"></script>
+<script type="text/javascript" src="../js/selectordie.min.js"></script>
+<script>
+$(function(){
+	$('select').selectOrDie();
+});
+</script>
+
+</head>
+
+<body>
+[#include "/header.html"]
+<link rel="stylesheet" type="text/css" href="../css/r_p_main.css">
+<link rel="stylesheet" type="text/css" href="../css/selectordie.css">
+<link rel="stylesheet" type="text/css" href="../css/selectordie_theme_01.css">
+<style>
+.select { width: 200px; margin: 150px auto;}
+.sod_select { font-size: 12px;}
+</style>
+<!--注册信息开始-->
+<div class="reg-box" id="r-1">
+  <div class="reg-title">注册会员</div>
+  <div class="reg-bz">
+    <div class="reg-bz-lan">
+      <span class="reg-bz-xh">1</span>
+      <span class="reg-bz-ts">填写注册信息</span>   
+    </div>
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">2</span>
+      <span class="reg-bz-ts">选择会员类型</span>   
+    </div>
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">3</span>
+      <span class="reg-bz-ts">填写详细信息</span>   
+    </div>
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">4</span>
+      <span class="reg-bz-ts">完成注册</span>   
+    </div>
+  </div>
+  <form id="r_member">
+  <div class="reg-li">
+    <div class="reg-li-xm">手机号码：</div>
+    <div class="reg-li-sr">
+      <input type="text" placeholder="请输入手机号码" id="r-tel" name="loginid"/>
+	   
+    </div>
+    <div class="reg-li-zs" id="r-m-tel"></div>
+  </div>
+  
+  <div class="reg-li">
+    <div class="reg-li-xm">密码：</div>
+    <div class="reg-li-sr">
+      <input type="password" placeholder="包含8-20位字母、数字或字符至少2种"  id="r-password" />
+    </div>
+    <div class="reg-li-zs" id="r-m-psw"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm">确认密码：</div>
+    <div class="reg-li-sr">
+      <input type="password"  id="r-c-password"/>
+    </div>
+    <div class="reg-li-zs" id="r-m-cpsw"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm">验证码：</div>
+    <div class="reg-li-sr">
+      <input type="text" class="yzm" id="r-yzm-1" />
+    
+	  <input type="button" id="checkCode" class="yzm-bh" onClick="createCode()"  title="点击刷新"/> 
+    </div>
+    <div class="reg-li-zs" id="r-m-yzm-1"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm">短信验证码：</div>
+    <div class="reg-li-sr">
+      <input type="text" placeholder="请输入验证码"  id="r-yzm"/>
+    </div>
+    <div class="reg-li-btn-yzm" id="r-m-yzm">
+     <input type="button" class="yzm" id="yzm"  value="免费获取验证码" >
+    </div>
+  </div>
+  <div class="reg-li-xy">
+            <input  type="checkbox" id="r-cb" /><a href="#">同意用户注册协议</a>
+          </div>
+  <div class="reg-li-btn" >
+    <a href="#" class="login-bg" id="r-sub-1">下一步</a> 
+  </div>
+  </form>
+</div>
+
+
+<!--SP注册信息开始-->
+<div class="reg-box" id="r-sp-2" style="display:none">
+  <div class="reg-title">注册会员</div>
+  <div class="reg-bz">
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">1</span>
+      <span class="reg-bz-ts">填写注册信息</span>   
+    </div>
+    <div class="reg-bz-lan">
+      <span class="reg-bz-xh">2</span>
+      <span class="reg-bz-ts">选择会员类型</span>   
+    </div>
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">3</span>
+      <span class="reg-bz-ts">填写详细信息</span>   
+    </div>
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">4</span>
+      <span class="reg-bz-ts">完成注册</span>   
+    </div>
+  </div>
+  <div class="reg-li-lx">
+    <a href="#" class="xz" onClick="cp_flag='1';" >视频会员注册购买</a>
+    <a href="#" class="noxz" onClick="$('#r-sc-4').show();$('#r-sp-2').hide();cp_flag='2'">素材会员注册购买</a>
+  </div>
+  <div class="reg-li-lx">
+    <span class="lxts">视频会员与素材会员不能相互同时使用，购买任意一种套餐只能享受其购买套餐内的服务</span>
+  </div>
+  <div class="reg-li-lx" style=" width:780px; margin:20px 10px; border-bottom:1px dashed #666666;"></div>
+  
+  <div class="reg-lx-box">
+    <div class="reg-li-lx">
+      <span class="hylx">视频会员</span>
+    </div>
+    <div class="reg-li-tc">
+	
+	 [@dbh_member_type id="187"  var="l"]
+	 	
+      <div class="reg-li-tc-jg">
+	 
+        <div class="tcbox">
+          <span class="babylon5">${l.discount}</span>
+          <span class="zhe">折</span>
+        </div>
+        <div class="tcbox">
+          <span class="fs36">${l.month}</span>
+          <span class="fs24">个月</span>
+        </div>
+        <div class="tcbox">
+          <span class="old">原价：${l.price}元</span>
+        </div>
+        <div class="tcbox">
+          <span class="new">现价：${l.disprice}元</span>
+        </div>
+      </div>
+	 
+      <div class="reg-li-tc-li">
+        <span class="tcxz6">6个月会员尊享特权</span>
+      </div>
+      <div class="reg-li-tc-sbox">
+        <img src="images/vip.png" />
+        <span>蒙古族动画给您不一样的民族特色</span>
+      </div>
+      <div class="reg-li-tc-sbox">
+        <img src="images/app.png" />
+        <span>少儿专业APP为您随时随地移动中享受优质服务</span>
+      </div>
+      <div class="reg-li-tc-sbox"></div>
+      <div class="reg-li-tc-sbox"></div>
+      <div class="reg-li-tc-li">
+      <a href="#" class="buy" onClick="r_cp_buy('${l.disprice}','${l.name}','${l.month}','${l.id}')">填写信息购买</a>
+      </div>
+	   [/@dbh_member_type]
+    </div>
+    <div class="reg-li-g"></div>
+    <div class="reg-li-tc">
+	 [@dbh_member_type id="188"  var="l"]
+      <div class="reg-li-tc-jg">
+	 
+        <div class="tcbox">
+          <span class="babylon5">${l.discount}</span>
+          <span class="zhe">折</span>
+        </div>
+        <div class="tcbox">
+          <span class="fs36">${l.month}</span>
+          <span class="fs24">个月</span>
+        </div>
+        <div class="tcbox">
+          <span class="old">原价：${l.price}元</span>
+        </div>
+        <div class="tcbox">
+          <span class="new">现价：${l.disprice}元</span>
+        </div>
+		
+      </div>
+	   [/@dbh_member_type ]
+      <div class="reg-li-tc-li">
+        <span class="tcxz12">12个月年费会员独享特权</span>
+      </div>
+      <div class="reg-li-tc-sbox">
+        <img src="images/vip.png" />
+        <span>蒙古族动画给您不一样的民族特色</span>
+      </div>
+      <div class="reg-li-tc-sbox">
+        <img src="images/app.png" />
+        <span>少儿专业APP为您随时随地移动中享受优质服务</span>
+      </div>
+      <div class="reg-li-tc-sbox">
+        <img src="images/dvd.png" />
+        <span>丰富多彩的动画光盘在您没有网络的时候任意播放</span>
+      </div>
+      <div class="reg-li-tc-sbox">
+        <img src="images/book.png" />
+        <span>精美的绘本故事让孩子在读书中找到快乐</span>
+      </div>
+      <div class="reg-li-tc-li">
+      <a href="#" class="buy" onClick="r_cp_buy('${l.disprice}','${l.name}','${l.month}','${l.id}')">填写信息购买</a>
+      </div>
+    </div>
+	
+  </div>
+</div>
+<!--注册信息结束-->
+<!--SP注册信息开始-->
+<div class="reg-box" id="r-gr-3" style="display:none">
+  <div class="reg-title">注册会员</div>
+  <div class="reg-bz">
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">1</span>
+      <span class="reg-bz-ts">填写注册信息</span>   
+    </div>
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">2</span>
+      <span class="reg-bz-ts">选择会员类型</span>   
+    </div>
+    <div class="reg-bz-lan">
+      <span class="reg-bz-xh">3</span>
+      <span class="reg-bz-ts">填写详细信息</span>   
+    </div>
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">4</span>
+      <span class="reg-bz-ts">完成注册</span>   
+    </div>
+  </div>
+  <form id="member-gr" method="post" action="${basePath}action/register/submit">
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>昵称：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text" id="gr-nickname"  name="nickname"/>
+	  <input type="hidden"   name="loginid" id="gr-loginid"/>
+	 
+	   <input type="hidden"   name="password" id="gr-password"/>
+	   <input type="hidden" name="nature" value="1" id="gr-nature"/>
+	     <input type="hidden" name="eTime"  id="gr-eTime"/>
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>真实姓名：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text" id="gr-userName"  name="userName"/>
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>身份证号：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text" id="gr-idCard" name="idCard" />
+    </div>
+    <div class="reg-li-zs" id="gr-idCard-m"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>性别：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sex">
+      <label><input type="radio" id="gr-sex" name="sex" checked="checked" value="1"> 男</label>
+      &nbsp;&nbsp;
+      <label><input type="radio" id="gr-sex" name="sex" value="2"> 女</label>
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>邮箱：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text" id="gr-mail" name="mail" />
+    </div>
+    <div class="reg-li-zs" id="gr-mail-m"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>QQ：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text"  id="gr-qq" name="qq" />
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>联系电话：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text" id="gr-tel"  name="tel" readonly="true"/>
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>职业：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+    
+	  <select class="myselect" id="gr-occupations" name="occupations">
+				<option value="计算机/互联网/通信/电子">计算机/互联网/通信/电子</option>
+				<option value="广告/媒体">广告/媒体</option>
+				
+				<option value="会计/金融/银行/保险">会计/金融/银行/保险</option>
+				<option value="贸易/消费/制造/营运">贸易/消费/制造/营运</option>
+				<option value="房地产/建筑">房地产/建筑</option>
+				<option value="专业服务/教育/培训">专业服务/教育/培训</option>
+				<option value="专业服务/教育/培训">专业服务/教育/培训</option>
+				<option value="服务业">服务业</option>
+				<option value="物流/运输">物流/运输</option>
+				<option value="服务业">服务业</option>
+				<option value="公务员">公务员</option>
+				<option value="学生">学生</option>
+				<option value="其他">其他</option>
+			</select>
+
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>所在地：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      
+	  <input name="address" id="gr-address" autocomplete="off" type="text" value="请选择/输入城市名称" class="city_input  inputFocus proCityQueryAll proCitySelAll" ov="请选择/输入城市名称">
+    </div>
+	
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li-grjs">
+    <div class="reg-li-xm-grjs"><span>个人简介：</span></div>
+    <div class="reg-li-sr-grjs">
+      <textarea cols="34" rows="8" id="gr-synopsis" name="synopsis"></textarea>      
+    </div>
+  </div>
+  <div class="reg-li" style="text-align:center;"><span class="zhushi">为必填信息，请您认真填写，以便我们能第一时间联系到您！</span><img src="images/star.jpg"></div>
+  </form>
+  <!--城市-->
+  <!---->
+<div class="provinceCityAll">
+  <div class="tabs clearfix">
+    <ul class="">
+      <li><a href="javascript:" class="current" tb="hotCityAll">热门城市</a></li>
+      <li><a href="javascript:" tb="provinceAll">省份</a></li>
+      <li><a href="javascript:" tb="cityAll" id="cityAll">城市</a></li>
+      <li><a href="javascript:" tb="countyAll" id="countyAll">区县</a></li>
+    </ul>
+  </div>
+  <div class="con">
+    <div class="hotCityAll invis">
+      <div class="pre"><a></a></div>
+      <div class="list">
+        <ul>
+          <!-- 					<li><a href="javascript:"  class="current">南京</a></li> -->
+        </ul>
+      </div>
+      <div class="next"><a class="can"></a></div>
+    </div>
+    <div class="provinceAll invis">
+      <div class="pre"><a></a></div>
+      <div class="list">
+        <ul>
+          <!-- 					<li><a href="javascript:"  class="current">江西省</a></li> -->
+        </ul>
+      </div>
+      <div class="next"><a class="can"></a></div>
+    </div>
+    <div class="cityAll invis">
+      <div class="pre"><a></a></div>
+      <div class="list">
+        <ul>
+          <!-- 					<li><a href="javascript:"  class="current">南京</a></li> -->
+        </ul>
+      </div>
+      <div class="next"><a class="can"></a></div>
+    </div>
+    <div class="countyAll invis">
+      <div class="pre"><a></a></div>
+      <div class="list">
+        <ul>
+        </ul>
+      </div>
+      <div class="next"><a class="can"></a></div>
+    </div>
+  </div>
+  <script src="../js/Areas/public.js"></script>
+</div>
+  <div class="reg-li-btn_1">
+   <input type="button" id="r-gr-back" class="login-bg" value="上一步"/>
+	<input type="button" id="r-gr-sub" class="login-bg" value="下一步"/>
+  </div>
+</div>
+<!--注册信息结束-->
+<!--SC注册信息开始-->
+<div class="reg-box" id="r-sc-4" style="display:none" >
+  <div class="reg-title">注册会员</div>
+  <div class="reg-bz">
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">1</span>
+      <span class="reg-bz-ts">填写注册信息</span>   
+    </div>
+    <div class="reg-bz-lan">
+      <span class="reg-bz-xh">2</span>
+      <span class="reg-bz-ts">选择会员类型</span>   
+    </div>
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">3</span>
+      <span class="reg-bz-ts">填写详细信息</span>   
+    </div>
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">4</span>
+      <span class="reg-bz-ts">完成注册</span>   
+    </div>
+  </div>
+  <div class="reg-li-lx">
+    <a href="#" class="noxz" onClick="$('#r-sp-2').show();$('#r-sc-4').hide();">视频会员注册购买</a>
+    <a href="#" class="xz">素材会员注册购买</a>
+  </div>
+  <div class="reg-li-lx">
+    <span class="lxts">视频会员与素材会员不能相互同时使用，购买任意一种套餐只能享受其购买套餐内的服务</span>
+  </div>
+  <div class="reg-li-lx" style=" width:780px; margin:20px 10px; border-bottom:1px dashed #666666;"></div>
+  
+  <div class="reg-lx-box">
+    <div class="reg-li-lx">
+      <span class="hylx">素材会员</span>
+    </div>
+    <div class="reg-li-lx-scts">
+      素材会员内容根据种类分为：人物、动物、生产生活用具、自然美术场景、社会美术场景五大类，按分类分成不同的素材。素材主要格式为三维：（.MB）（.VUE），二维：（.PSD）（.FLA）格式。可以按照您的需求下载您需要的素材资源！
+    </div>
+    <div class="reg-li-lx">
+      <a href="#" class="grqy" id="r-grzc" >个人用户信息注册</a>
+      <a href="#" class="grqy" id="r-qyzc" >企业用户信息注册</a>
+    </div>
+  </div>
+</div>
+<!--注册信息结束-->
+<!--qy注册信息开始-->
+<div class="reg-box" id="r-qy-5" style="display:none">
+  <div class="reg-title">注册会员</div>
+  <div class="reg-bz">
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">1</span>
+      <span class="reg-bz-ts">填写注册信息</span>   
+    </div>
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">2</span>
+      <span class="reg-bz-ts">选择会员类型</span>   
+    </div>
+    <div class="reg-bz-lan">
+      <span class="reg-bz-xh">3</span>
+      <span class="reg-bz-ts">填写详细信息</span>   
+    </div>
+    <div class="reg-bz-hui">
+      <span class="reg-bz-xh">4</span>
+      <span class="reg-bz-ts">完成注册</span>   
+    </div>
+  </div>
+   <form id="member-qy" method="post" action="${basePath}action/register/submit">
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>当前号码是否为运营者联系方式</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text" name="tel" id="qy-tel" readonly="true"/>
+	  <input type="hidden" id="qy-loginid"  name="loginid"/>
+	  <input type="hidden"  name="password" id="qy-password"/>
+	  <input type="hidden" name="nature" value="2"/>
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"></div>
+    <div class="reg-li-sex">
+      <label><input type="radio" id="r-qy-tel" checked="checked" name="r-qy-tel" value="1"> 是本号码</label>
+      &nbsp;&nbsp;
+      <label><input type="radio" id="r-qy-tel" name="r-qy-tel" value="2"> 不是本号码</label>
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>若不是，请填写运营人员号码</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text"  id="qy-tel1" name="tel1"/>
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>企业全称：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text" id="qy-nickname" name="nickname" />
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>组织机构代码：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text" id="qy-OrganizationId" name="OrganizationId" />
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>工商执照注册号：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text"  id="qy-licenseId" name="licenseId"/>
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>法定代表人、企业负责人姓名：</span><img src="images/star.jpg"></div>
+    <div class="reg-li-sr">
+      <input type="text" id="qy-userName" name="userName" />
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>企业基本资料上传：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr-qy">
+      组织机构代码证必须在有效期范围内<br/>格式要求：原件照片、扫描件或复印件扫描，大小不超过2M。
+    </div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"></div>
+    <div class="reg-li-btn-up" id="r-o-img">
+     <span class="btn btn-success fileinput-button">
+                    <span>上&nbsp;传</span>
+                  <input id="fileupload1" type="file" name="files[]" data-url="${basePath}action/web/upload" multiple>
+          </span>
+		<span id="r-o-m"></span>
+	   <input type="hidden" name="Organization"  id="qy-Organization"/>
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"><span>企业工商营业执照上传：</span><img src="${basePath}images/star.jpg"></div>
+    <div class="reg-li-sr-qy">
+      企业工商营业执照必须在有效期范围内<br/>格式要求：原件照片、扫描件或复印件扫描，大小不超过2M。
+    </div>
+  </div>
+  <div class="reg-li">
+    <div class="reg-li-xm"></div>
+    <div class="reg-li-btn-up" id="r-l-img">
+     	 <span class="btn btn-success fileinput-button">
+                    <span>上&nbsp;传</span>
+                  <input id="fileupload" type="file" name="files[]" data-url="${basePath}action/web/upload" multiple>
+          </span>
+		  
+		  <input type="hidden" name="license" id="qy-license" />
+	  <span id="r-l-m"></span>
+    </div>
+    <div class="reg-li-zs"></div>
+  </div>
+  <div class="reg-li" style="text-align:center;"><span class="zhushi">为必填信息，请您认真填写，以便我们能第一时间联系到您！</span><img src="images/star.jpg"></div>
+  </form>
+  <div class="reg-li-btn_1">
+  
+	<input type="button" id="r-qy-back" class="login-bg" value="上一步"/>
+	<input type="button" id="r-qy-sub" class="login-bg" value="下一步"/>
+  </div>
+</div>
+<script src="../js/jQueryFileUpload/jquery.ui.widget.js"></script>
+<script src="../js/jQueryFileUpload/jquery.iframe-transport.js"></script>
+<script src="../js/jQueryFileUpload/jquery.fileupload.js"></script>
+<script type="text/javascript">
+$(function () {
+    $('#fileupload').fileupload(	{	
+        dataType: 'json',
+		 maxFileSize:2000000, 
+  		send:function (e, data) {
+         	if(data.files[0].type!="image/jpeg"){
+				 $("#r-l-m").html("请上传JPG格式图片" );//end $("#uploaded-files").append()
+				return false;
+			};
+			if((data.files[0].size/1024)/1024>2){
+				 $("#r-l-m").html("请上传小于2M图片");//end $("#uploaded-files").append()
+				return false;
+			};
+        },
+        done: function (e, data) {
+            $.each(data.result, function (index, file) {
+ 				$("input[name='license']").val(file.filePath);
+                $("#r-l-m").html(file.fileName+"上传成功" );//end $("#uploaded-files").append()
+            }); 
+        }
+    });
+	  $('#fileupload1').fileupload(	{	
+      		dataType: 'json',
+			maxFileSize:2000000, 
+  			send:function (e, data) {
+				if(data.files[0].type!="image/jpeg"){
+					 $("#r-o-m").html("请上传JPG格式图片" );//end $("#uploaded-files").append()
+					return false;
+				};
+				if((data.files[0].size/1024)/1024>2){
+					 $("#r-o-m").html("请上传小于2M图片");//end $("#uploaded-files").append()
+					return false;
+				};
+       		},
+			done: function (e, data) {
+				$("tr:has(td)").remove();
+				$.each(data.result, function (index, file) {
+					$("input[name='Organization']").val(file.filePath);
+					 $("#r-o-m").html(file.fileName+"上传成功" );//end $("#uploaded-files").append()
+				 });
+			 }
+		 });
+});
+</script>
+<!--注册信息结束-->
+
+
+
+<!--支付信息开始-->
+<div class="pay-box" id="r-pay-zf" style="display:none">
+  <div class="pay-li-title">
+    <span class="zzdg">您正在订购“视频会员”<span id="r-cp-name"></span></span>
+    <span class="zzdg">当前账号：</span>
+    <span class="dqzh" id="r-pay-tel"></span>
+  </div>
+  <div class="pay-li">
+    <div class="slt"><img src="${basePath}images/tu1.jpg" /></div>
+    <div class="text">
+      <span class="title">“视频会员”<span id="r-cp-name-1"></span></span>
+      <p>●&nbsp;套餐包含：集成产品会员一年，移动端APP一年，动画光碟，寓言故事图书</p>
+      <p>●&nbsp;会员片库视频免费看、安达动漫新片最早看、网络动漫自由看</p>
+      <p>●&nbsp;观看无广告省时又省心、专属高速通道高清不卡顿</p>
+      <p>●&nbsp;专属身份标识彰显尊贵、VIP会员活动、会员礼品送不停</p>
+      <p>●&nbsp;可支持电脑、手机及平板电脑观看且可多屏互动</p>
+    </div>
+  </div>
+  <div class="pay-li-g"></div>
+  <div class="pay-li-xz">
+    <ul>
+      <li><a href="javascript:;" class="notext zhifubao checked" id="r-zfb">支付宝</a></li>
+      <li><a href="javascript:;" class="notext yhkzhifu" id="r-wy">银行卡支付</a></li>
+      <li style="display:none;"><a href="javascript:;" class="notext wxzhifu" id="zhifubaoa">微信支付</a></li>
+    </ul>
+  </div>
+  <!--zfb-->
+  <div class="zfcont" style=" text-align:center;" id="r-zfb-m">
+    <div class="sfje">实付金额：<span id="r-zfb-j"></span>元</div>
+    <div class="pay-li-btn">
+      <a href="#" class="login-bg" id="r-zfb-sub">确认支付</a> 
+    </div>
+  </div>
+  <!--wy-->
+    <div class="zfcont" style="display:none" id="r-wy-m">
+    <h3>网银银行支付 <span class="c999f12">建议您使用IE浏览器。需在银行开通网银，且支付有金额限额</span></h3>
+	<ul class="wangyin" id="wangyinul">
+	  <li class="fleft"><a href="javascript:;" class="notext zhaohang" data-wyid="CMB-DEBIT">招商银行</a></li>
+	  <li class="fleft"><a href="javascript:;" class="notext gonghang" data-wyid="ICBC-DEBIT">中国工商银行</a></li>
+	  <li class="fleft"><a href="javascript:;" class="notext zhonghang" data-wyid="BOC-DEBIT">中国银行</a></li>
+	  <li class="fleft"><a href="javascript:;" class="notext jianhang" data-wyid="CCB-DEBIT">中国建设银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext guangda" data-wyid="CEB-DEBIT">光大银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext nonghang" data-wyid="ABC">中国农业银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext minsheng" data-wyid="CMBC">中国民生银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext jiaohang" data-wyid="COMM-DEBIT">中国交通银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext youzheng" data-wyid="PSBC-DEBIT">中国邮政储蓄</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext pufa" data-wyid="SPDB-DEBIT">浦东发展银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext zhongxin" data-wyid="CITIC">中信实业银行</a></li>
+	</ul>
+    <div class="clear"></div>
+	<a href="javascript:;" class="moreyinhang" id="moreyinhang">更多银行</a>
+	<a href="javascript:;" class="otheryinhang hide" id="otheryinhang">选择其他银行</a>
+    <div class="pay-li-btn">
+      <a href="#" class="login-bg" id="r-wy-sub">确认支付</a> 
+    </div>
+  </div>
+  <!--wx-->
+    <div class="zfcont" style="display:none">
+		<div class="wxzf">
+		  <img src="images/ewm.jpg" />
+		</div>
+		<div class="wxzf">
+		  <span class="ts">请使用微信扫描二维码以完成支付</span>
+		</div>
+		<div class="wxzf">
+		  <span class="jine">¥15</span>
+		</div>
+  </div>
+<form name=alipayment id="alipayment" action="anda_pay_sub" method=POST target="_blank">
+	 <input  id="price" name="r-zfb-price" type="hidden" />
+	 <input id="r-zfb-loginid" name="loginid" type="hidden"/>
+	 <input type="hidden"  name="pid" id="r-zfb-pid" />
+	 <input  id="r-zfb-paymentName" name="paymentName" type="hidden" />
+	 <input  id="r-zfb-disprice" name="disprice" type="hidden"/>
+	 <input  id="r-zfb-paymentMonth" name="paymentMonth" type="hidden" />
+	 <input  id="r-zfb-bankcode" name="bankcode" type="hidden"/>
+ </form>
+  <div class="pay-li">
+    <div class="text">
+      <span class="title2">温馨提示：</span>
+      <p>1、套餐到期前一个月前将通知您发起续费，以保证您能够正常的使用本站服务；</p>
+      <p>2、如支付遇到困难、异常、失败等情况，请关闭页面或联系客服帮您解决；</p>
+      <p>3、请保证支付宝账户或关联银行卡余额足够，避免续费失败，影响您的支付成功；</p>
+      <p>4、如有疑问，请拨打400-800-xxxx，安达文化传媒客服竭诚为您服务。</p>
+    </div>
+  </div>
+
+  <a href="javascript:;" data-reveal-id="r-myModal" id="r-showMyModal" style="display:none;"></a>
+	<div id="r-myModal" class="reveal-modal">
+		<h3>请不要关闭本页。完成支付后点击已完成支付，完成注册！</h3>
+		<a href="#" class="btna fleft" style="margin-left:70px; margin-right:30px;" id="r-pay-over">已完成支付</a>
+		<a href="https://cshall.alipay.com/hall/index.htm" class="btna fleft" style="margin-left:70px; margin-right:30px;" target="_blank" >支付遇到问题</a>
+	</div>
+
+</div>
+<!--支付信息结束-->
+[#include "/footer.html"]
+</body>

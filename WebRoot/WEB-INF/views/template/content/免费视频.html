@@ -1,0 +1,86 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+[@dbh_content]
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+<link type="text/css" rel="stylesheet" href="${basePath}css/mfsp.css" />
+<script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${basePath}js/login.js"></script>
+[@dbh_website]<meta name="keywords" content="${webKey}" />[/@dbh_website]
+
+<SCRIPT LANGUAGE=JavaScript>
+<!--
+function getLight(pars){if(pars=="open"){close_light(this)}else{close_light(this)}};function thisMovie(movieName){if(navigator.appName.indexOf("Microsoft")!=-1){return window[movieName]}else{return document[movieName]}}
+//-->
+</SCRIPT>
+<style>
+.video_p { OVERFLOW: hidden; WIDTH: 100%; POSITION: relative}
+.close_light_bg {DISPLAY: none; BACKGROUND: #000; FILTER: alpha(opacity = 95); LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; opacity: .895}
+</style>
+<title>[@dbh_website]${webName}[/@dbh_website] - ${content.title}</title>
+
+</head>
+
+<body>
+[#include "/header.html"]
+<div class="content">
+<script type="text/javascript" src="${basePath}component/kbplay/swfobject.js"></script>
+	<div class="dh"><div class="dhimg"></div>当前位置：[@dbh_bot columnId=24  var="list"]<a href="${url}" target="_self">${list.name}</a> > [/@dbh_bot]${content.title}</div>
+	<h3>${content.title}</h3>
+	<div class="video">
+		<div>
+			[#list file as f]
+			[#if f_index==0]
+		  	<div id="CuPlayer" class="video_p">
+			
+				<!--<a  style="display:block;width:980px;height:485px;" id="player"  href="${f.path}"> -->
+<SCRIPT LANGUAGE=JavaScript>
+setVideo(980,485,"${f.id}","CuPlayer");
+//-->
+</SCRIPT> 
+
+<SCRIPT language=javascript src="${basePath}component/kbplay/action.js" type=text/javascript></SCRIPT>		
+			
+			</div>
+			<div id="pl1" style="display:none;;width:980px;height:485px; ">
+			
+			[#if f.name?index_of(".swf") >1]
+			<embed src="${f.path}" height="485px" width="980px" allowFullScreen="true">
+				</embed>
+			[/#if]
+			</div>
+		
+		
+		<script>
+		
+			 var fileExtend="${f.name}".substring("${f.name}".lastIndexOf('.')).toLowerCase();
+			 if(fileExtend==".swf"){
+			 
+			 	$("#CuPlayer").hide();
+				$("#pl1").show();
+			 }
+      		    
+		</script>
+		</div>
+	</div>
+	<div style=" width:980px; margin:0 auto; padding-top:10px; font-size:14px; ">${f.detailed}</div>
+	[/#if]
+		[/#list]
+</div>
+<div class="listbox">
+	<iframe  name="discussFrame" width="100%" frameborder=0  allowtransparency="true"  height="480px"
+							marginheight=0  marginwidth=0  scrolling="no"  style="z-index:9999" src="${basePath}action/list_h/25/8/免费视频播放页列表/1"></iframe>
+</div>
+<div class="content">
+<div  style="margin:0 auto; width:980px">[@dbh_ad id='767']<a href="${link}" target="_blank"><img src="${filePath}" width="980px" height="100px" /></a>[/@dbh_ad]</div>
+</div>
+
+${pageView}
+[/@dbh_content]
+[#include "/footer.html"]
+<DIV class="close_light_bg" id="close_light_bg"></DIV>
+</body>
+</html>

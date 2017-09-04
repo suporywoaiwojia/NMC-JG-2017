@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+<link type="text/css" rel="stylesheet" href="${basePath}css/2jindex.css" />
+<link type="text/css" rel="stylesheet" href="${basePath}css/cp2j.css" />
+<link href="${basePath}css/2jhd/css/travel.css" rel="stylesheet" type="text/css" />
+
+
+<script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${basePath}css/2jhd/js/jquery.scrollpic.js"></script>
+<script type="text/javascript" src="${basePath}js/login.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#scrollpic00').scrollpic({
+		defaultSpeed : 1000,   //默认滚动时间  点击按钮滚动时间
+		speed : 500   //自动播放滚动时间
+	});
+	
+	
+});
+
+
+function logoff(){
+				var url = "${basePath}action/logoff";
+				$.post(url);
+			}
+</script>
+
+<style>
+/*.border_1_ccc {border:1px #CCCCCC solid;}*/
+
+</style>
+
+
+<title>[@dbh_website]${webName}[/@dbh_website]</title>
+</head>
+
+<body>
+[#include "/en/header_en.html"]
+<div class="top">
+		<div class="left_top">
+			<div class="hd">
+				<div class="scrollMap" id="scrollpic00">
+					<span class="slidePre"><a href="javascript:void(0);" title="上一页"></a></span>
+						<div class="picWrap">
+							<ul>
+							[#assign x=0 /]	
+								[@dbh_slideshow  slideshowId=700  var ='hd']
+								[#assign x=x+1 /]
+								<li [#if x=1]class="show"[/#if]><a href="#"><img src="${hd.httppath}"  width="360px" height="255px" /></a></li>
+							[/@dbh_slideshow]
+							</ul>
+						</div>
+					<span class="slideNext"><a href="javascript:void(0);" title="下一页"></a></span>
+				</div>
+			</div>
+			<div style="width:375px; float:left">
+				<ul class="hdul">
+					[@dbh_content_list var='dbhlist' parentId=7 count=4  orderBy=1 lg='en']
+					<li> <a href="${url}" target="_blank"><img  src="${basePath}images/jb_c.jpg" width="180px" height="120px"  class="border_1_ccc" title="${dbhlist.title}"/></a></li>
+					[/@dbh_content_list]
+				</ul>
+			</div>
+			
+		</div>
+		<div class="right_top">
+			<div class="login" id="login"  >
+				[#include "/en/list-login_en.html"]
+			</div>
+			<div class="user" id="user" style="display:none">
+				[#include "/en/usermsg_en.html"]
+			</div>
+			<div class="login_ad">[@dbh_ad id='789']<img src="${filePath}"  width="200px" height="120px" />[/@dbh_ad]</div>
+		</div>
+		<div  class="fg"></div>
+</div>
+<div class="content">
+	<div class="left_content">
+		<!--历史人物 -->
+		<div class="part">
+		[@dbh_channel id=21 lg='en']
+			<span class="partname">${name}</span>
+			<div style="width:71%; right:65px"></div>
+			<span class="more"><a href="${url}" target="_blank">More>></a></span>
+		[/@dbh_channel]
+		</div>
+		<div class="list">
+		[@dbh_content_list var='mfsp' channelId=21 count=9  orderBy=1 lg='en']
+			<ul>
+				<li class="imgbox">
+				<a href="${url}" target="_blank"><img src="${basePath}images/jb_c.jpg" width="240px" height="160px"  class=" border_1_ccc"/></a>
+				</li>
+				<li class="titlebox">
+					<label class="protitle"><a href="${url}" target="_blank">${mfsp.title}</a></label>
+					<label class="hits">${hits}&nbsp;</label>
+				</li>
+				
+				<li class="msgbox">
+				[#if mfsp.summary?length lte 30] 
+				${mfsp.summary}
+				[#else] 
+				${mfsp.summary [0..30]}... 
+				[/#if]
+				</li>
+			</ul>
+		[/@dbh_content_list]
+			
+		</div>
+		<!--常识 -->
+		
+		<div class="part">
+		[@dbh_channel id=22  lg='en']
+			<span class="partname">${name}</span>
+			<div  style="width:70%; right:65px"></div>
+			<span class="more"><a href="${url}" target="_blank">More>></a></span>
+		[/@dbh_channel]
+		</div>
+		<div class="list">
+			[@dbh_content_list var='cs' channelId=22 count=9  orderBy=1 lg='en']
+			<ul>
+				<li class="imgbox">
+				<a href="${url}" target="_blank"><img src="${basePath}images/jb_c.jpg" width="240px" height="160px"  class="border_1_ccc"/></a>
+				</li>
+				<li class="titlebox">
+					<label class="protitle"><a href="${url}" target="_blank">${cs.title}</a></label>
+					<label class="hits">${hits}&nbsp;</label>
+				</li>
+				
+				<li class="msgbox">
+				[#if cs.summary?length lt 39] 
+				${cs.summary}
+				[#else] 
+				${cs.summary [0..39]}... 
+				[/#if]
+				</li>
+			</ul>
+		[/@dbh_content_list]
+		</div>
+		<!-- -->
+		<!--常识 -->
+		<div class="part">
+		[@dbh_channel id=23  lg='en']
+			<span class="partname">${name}</span>
+			<div  style="width:56%; right:65px"></div>
+			<span class="more"><a href="${url}" target="_blank">More>></a></span>
+		[/@dbh_channel]
+		</div>
+		<div class="list">
+			[@dbh_content_list var='spjk' channelId=23 count=9  orderBy=1 lg='en']
+			<ul>
+				<li class="imgbox">
+				<a href="${url}" target="_blank"><img src="${basePath}images/jb_c.jpg" width="240px" height="160px"  class="border_1_ccc"/></a>
+				</li>
+				<li class="titlebox">
+					<label class="protitle"><a href="${url}" target="_blank">${spjk.title}</a></label>
+					<label class="hits">${hits}&nbsp;</label>
+				</li>
+				<li class="msgbox">
+				[#if spjk.summary?length lt 39] 
+				${spjk.summary}
+				[#else] 
+				${spjk.summary [0..40]}... 
+				[/#if]
+				</li>
+			</ul>
+		[/@dbh_content_list]
+		</div>
+		
+		<!--数字与图形 -->
+		
+	
+		<!--手工 -->
+		
+		<!--故事 -->
+		
+		<!--诗歌 -->
+		
+		
+		<!--民俗 -->
+		
+		
+		<!--寓言 -->
+		
+		
+		<!--END -->
+	</div>
+	<div class="right_content">
+		<div class="right_content_title">Recommend>></div>
+		<div class="tjlist">
+			[@dbh_content_list var='tj' parentId=7 count=4 recommend=1  orderBy=1 lg='en']
+			<ul>
+				<li class="tjimg"><a href="${url}" target="_blank"><img src="${basePath}images/jb_c.jpg" width="200px" height="133px"   class="border_1_ccc"/></a></li>
+				<li class="tjtitle">
+					<label class="tjname"><a href="${url}" target="_blank">${tj.title}</a></label>
+					<label class="tjhits">
+				[#if hits?length lt 3] 
+				${hits}
+				[#else] 
+				${hits [0..4]}... 
+				[/#if]&nbsp;</label>
+				</li>	
+				<li class="tjmsg">
+				<a href="${url}" target="_blank">
+				[#if tj.summary?length lt 30] 
+				${tj.summary}
+				[#else] 
+				${tj.summary [0..31]}... [/#if]
+				</a>
+				</li>
+			</ul>
+			[/@dbh_content_list]
+			
+		</div>
+		
+		<div class="right_ad">[@dbh_ad id='774']<img src="${filePath}" width="200px" height="200px" />[/@dbh_ad]</div>
+		
+		
+			<div class="right_ad">[@dbh_ad id='783']<img src="${filePath}" width="200px" height="200px" />[/@dbh_ad]</div>
+	</div>
+	<div class="ad">[@dbh_ad id='767']<img src="${filePath}" width="980px" height="100px" />[/@dbh_ad]</div>
+</div>
+<div style="height:1px; width:100%; clear:both;"></div>
+[#include "/footer.html"]
+</body>
+</html>

@@ -1,0 +1,52 @@
+		<script type="text/javascript">
+			$(function(){
+				$('#${columnid}').css('background-color','#f86400');
+				$('#${columnid}').css('padding-left','20px');
+				$('#${columnid}').css('font-size','14px');
+			});
+		</script>
+		<div class="list-left">
+        	<div style=" font-family:微软雅黑; font-size:18px; color:#5aa5de; margin-left:65px; 
+            	position:absolute; height:50px; line-height:50px">Sort Selection
+        	</div>
+    	</div>
+    	<div style="background-color:#e4e5e7; border:1px solid #e4e5e7;">
+        	<ul class="leftul">
+             
+              [@dbh_channel_list parentid=2 var="list2" lg='en']
+				 <li id="${list2.id}">
+                <a href="${url}" target="_self">${list2.name}</a>
+                </li>
+				[/@dbh_channel_list]
+                
+				[@dbh_channel_list parentid=3 var="list2" lg='en']
+				  <li id="${list2.id}"><a href="${url}" target="_self">${list2.name}</a>
+                </li>
+				[/@dbh_channel_list]
+               
+			   [@dbh_channel_list parentid=4 var="list2" lg='en']
+				  <li id="${list2.id}"><a href="${url}" target="_self">${list2.name}</a>
+                </li>
+				[/@dbh_channel_list]
+				
+				[@dbh_channel_list parentid=5 var="list2" lg='en']
+				 <li id="${list2.id}"><a href="${url}" target="_self">${list2.name}</a>
+                </li>
+				[/@dbh_channel_list]
+				
+				[@dbh_channel_list parentid=6 var="list2" lg='en']
+				  <li id="${list2.id}"><a href="${url}" target="_self">${list2.name}</a>
+                </li>
+				[/@dbh_channel_list]
+				
+				[@dbh_channel_list parentid=7 var="list2" lg='en']
+				  <li id="${list2.id}"><a href="${url}" target="_self">${list2.name}</a>
+                </li>
+				[/@dbh_channel_list]
+				
+				[@dbh_channel_list parentid=8 var="list2" lg='en']
+				 <li id="${list2.id}"><a href="${url}" target="_self">${list2.name}</a>
+                </li>
+				[/@dbh_channel_list]
+         	</ul>
+		</div>

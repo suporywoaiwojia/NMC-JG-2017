@@ -1,0 +1,44 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+[@dbh_content]
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+
+<script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${basePath}js/login.js"></script>
+
+<title>[@dbh_website]${webName}[/@dbh_website] - ${content.title}</title>
+
+</head>
+
+<body>
+[#include "/header.html"]
+<div class="content">
+	<div class="dh"><div class="dhimg"></div>当前位置：[@dbh_bot columnId=content.column.id  var="list"]<a href="${url}" target="_self">${list.name}</a> > [/@dbh_bot]${content.title}</div>
+	<h3>${content.title}</h3>
+	<div class="c_detailed">
+		
+			
+			 ${detailed}
+		
+		
+		
+		
+		</div>
+	</div>
+
+
+
+<div class="content">
+<div  style="margin:0 auto; width:980px">[@dbh_ad id='767']<img src="${filePath}" width="980px" height="100px" />[/@dbh_ad]</div>
+</div>
+
+
+[/@dbh_content]
+[#include "/footer.html"]
+
+</body>
+</html>

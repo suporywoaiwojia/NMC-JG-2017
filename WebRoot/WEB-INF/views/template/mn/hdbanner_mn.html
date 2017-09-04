@@ -1,0 +1,82 @@
+<script type="text/javascript" src="${basePath}css/2jhd/js/jquery.scrollpic.js"></script>
+<link href="${basePath}css/2jhd/css/travel.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function(){
+	$('#scrollpic00').scrollpic({
+		defaultSpeed : 1000,   //默认滚动时间  点击按钮滚动时间
+		speed : 500   //自动播放滚动时间
+	});
+});
+
+</script>
+<script type="text/javascript">
+$(function(){
+				$("#searchSub").click(function(){
+					
+					var key=encodeURI(encodeURI($('#searchInput').val()));
+					if(key==""){
+						alert("请输入检索关键字");
+						return false;
+					}else{
+						window.open('${basePath}action/search/mn/'+key+'/1');
+					}
+				});
+});
+</script>
+
+<div class="k"></div>
+<div class="top">
+  <div class="top-l">
+  
+  <div class="scrollMap" id="scrollpic00">
+		<span class="slidePre"><a href="javascript:void(0);" title="上一页"></a></span>
+			<div class="picWrap">
+				
+				[#assign x=0 /]	
+				[@dbh_slideshow  slideshowId=700  var ='hd']
+				[#assign x=x+1 /]
+					<li [#if x=1]class="show"[/#if]><a href="#"><img src="${hd.httppath}"  width="360px" height="255px" /></a></li>
+				[/@dbh_slideshow]
+				
+			</div>
+		<span class="slideNext"><a href="javascript:void(0);" title="下一页"></a></span>
+	</div>
+  
+  </div>
+  <div class="top-m">
+  [@dbh_content_list  var='dbhlist'  parentId=type count=4  orderBy=1 lg='mn']
+    <div class="top-m-bd"><a href="${url}">[#if type!=7]<img src="${dbhlist.coverPath}"   width="178px" height="118px" style="border:1px #CCCCCC solid" title="${dbhlist.title}"/>[/#if][#if type=7]<img src="${basePath}images/jb_c.jpg"   width="178px" height="118px" style="border:1px #CCCCCC solid" title="${dbhlist.title}"/>[/#if]</a></div>
+[/@dbh_content_list]
+  </div>
+  <div class="top-r">
+  
+   
+  [@dbh_servlet scope="session" name="loginid" var='loginid']
+  [#if loginid!=""]
+	[@dbh_member id=loginid var="dd"]
+  <div style="width:120px; height:255px; float:right;" id="member">
+    <div class="login-face"><a href="#"><img src="${dd.image}" width="108px" height="108px" /></a></div>
+    <div class="logout" onclick="loginoff()"><a href="#" target="_self"><img src="${basePath}images/mn/logout.jpg" /></a></div>
+  
+  </div>
+  
+	[/@dbh_member]
+ 	[#else]
+ 
+	<div style="width:120px; height:255px; float:right;" id="login">
+		<div class="login"><a href="http://www.anda9.net/action/register" ><img src="${basePath}images/mn/zhuce.png" /></a></div>
+		<div class="login" onclick="$('#showMyModal').click();$('#msg').html('');" ><a href="#" target="_self"><img src="${basePath}images/mn/login.png" /></a></div>
+	</div>
+	 [/#if]
+	[/@dbh_servlet]
+    <div class="search">
+      <div class="input-box">
+      <input class="input-box-s" name="" type="text" autocomplete="off" id="searchInput" />
+      <input class="input-box-search" name="" type="image" src="${basePath}images/mn/search.jpg" value=" " id="searchSub"/>
+    </div>
+    </div>
+  </div>
+</div>
+<!--推荐位置结束-->
+<div class="fg"></div>
+<div class="k"></div>

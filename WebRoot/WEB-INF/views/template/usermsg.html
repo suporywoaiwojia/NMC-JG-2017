@@ -1,0 +1,23 @@
+[@dbh_servlet scope="session" name="loginid" var='loginid']
+	[#if loginid!=""]
+			[@dbh_member id=loginid var="dd"]
+			
+<div class="usertx"><a href="../member"  target="_blank"><img src="${dd.image}" width="60px" height="60px" id="faceimg"/></a></div>
+<div class="usern">
+
+	<span style="color:#FF6600" id="username">用户名：<a href="../member"  target="_blank">[#if dd.userName?length lte 3] </a>
+				${dd.userName}
+				[#else] 
+				${dd.userName[0..3]}...[/#if] </span>
+	<span><br/><a onclick="loginoff()" href="#">[安全退出]</a></span>
+</div>
+<div class="userp">
+	<ul>
+		<li><a href="../member"  target="_blank"><img src="../../images/own.jpg" width="95px" height="40px" /></a></li>
+		<li style=" margin-left: 10px;"><a href="http://www.anda9.net/action/re_pay"  target="_blank"><img src="../../images/vippay.jpg" width="95px" height="40px" /></a></li>
+	</ul>
+</div>
+
+[/@dbh_member]
+[/#if]
+[/@dbh_servlet ]

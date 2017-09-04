@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+<link type="text/css" rel="stylesheet" href="${basePath}css/2jindex.css" />
+<link type="text/css" rel="stylesheet" href="${basePath}css/rw2j.css" />
+
+<link href="${basePath}css/2jhd/css/travel.css" rel="stylesheet" type="text/css" />
+
+
+<script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${basePath}css/2jhd/js/jquery.scrollpic.js"></script>
+<script type="text/javascript" src="${basePath}js/login.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#scrollpic00').scrollpic({
+		defaultSpeed : 1000,   //默认滚动时间  点击按钮滚动时间
+		speed : 500   //自动播放滚动时间
+	});
+});
+function logoff(){
+				var url = "${basePath}action/logoff";
+				$.post(url);
+			}
+</script>
+
+<style>
+/*.border_1_ccc{border:1px #CCCCCC solid;}*/
+.clear{clear:both; height:9px;}
+
+
+</style>
+<title>[@dbh_website]${webName}[/@dbh_website]</title>
+</head>
+
+<body>
+[#include "/en/header_en.html"]
+<div class="top">
+		<div class="left_top">
+			<div class="hd">
+				<div class="scrollMap" id="scrollpic00">
+					<span class="slidePre"><a href="javascript:void(0);" title="上一页"></a></span>
+						<div class="picWrap">
+							<ul>
+							[#assign x=0 /]	
+								[@dbh_slideshow  slideshowId=700  var ='hd']
+								[#assign x=x+1 /]
+								<li [#if x=1]class="show"[/#if]><a href="#"><img src="${hd.httppath}"  width="360px" height="220px" /></a></li>
+							[/@dbh_slideshow]
+								
+							</ul>
+						</div>
+					<span class="slideNext"><a href="javascript:void(0);" title="下一页"></a></span>
+				</div>			
+			</div>
+			<div style="width:375px; float:left">
+				<ul class="hdul">
+				[@dbh_content_list var='dbhlist' parentId=5 count=4  orderBy=1 lg='en']
+					<li><a href="${url}" target="_blank"> <img  src="${dbhlist.coverPath}" width="180px" height="120px" style="border:1px #CCCCCC solid"/></a></li><!---->
+				[/@dbh_content_list]
+				</ul>
+			</div>
+			
+		</div>
+		<div class="right_top">
+			<div class="login" >
+			[#include "/en/list-login_en.html"]
+			</div>
+			<div class="user"  style="display:none">
+				[#include "/en/usermsg_en.html"]
+			</div>
+			<div class="login_ad">[@dbh_ad id='789']<img src="${filePath}"  width="200px" height="120px"/>[/@dbh_ad]</div>
+		</div>
+		<div  class="fg"></div>
+</div>
+<div class="content">
+	<div class="left_content">
+        
+		<!--历史人物 -->
+		<div class="part">
+		[@dbh_channel id=16 lg='en']
+			<span class="partname">${name}</span>
+			<div style="width:53%; right:65px"></div>
+			<span class="more"><a href="${url}" target="_blank">More>></a></span>
+		[/@dbh_channel]
+		</div>
+		<div class="list">
+		[@dbh_content_list var='lsrw' channelId=16 count=15  orderBy=1 lg='en']
+			<ul>
+				<li class="imgbox"><a href="${url}" target="_blank"><img src="${lsrw.coverPath}" class="border_1_ccc" width="135px" height="180px"/></a></li>
+				<li class="titlebox"><a href="${url}" target="_blank">${lsrw.title}</a></li>
+			</ul>
+		[/@dbh_content_list]
+			
+		</div>
+        
+        <div class=" clear "></div>
+		<!--文学人物 -->
+		<div class="part">
+		[@dbh_channel id=17 lg='en']
+			<span class="partname">${name}</span>
+			<div  style="width:41%; right:65px"></div>
+			<span class="more"><a href="${url}" target="_blank">More>></a></span>
+		[/@dbh_channel]
+		</div>
+		<div class="list">
+		[@dbh_content_list var='wxrw' channelId=17 count=15  orderBy=1 lg='en']
+			<ul  >
+            
+				<li class="imgbox"><a href="${url}" target="_blank"><img src="${wxrw.coverPath}" class="border_1_ccc" width="135px" height="180px"/></a></li>
+				<li class="titlebox"><a href="${url}" target="_blank">${wxrw.title}</a></li>
+			
+            </ul>
+		[/@dbh_content_list]
+		</div>
+        <div class=" clear "></div>
+		
+	</div>
+	<div class="right_content">
+		<div class="right_content_title">Recommend>></div>
+		<div class="tjlist">
+			[@dbh_content_list var='tj' parentId=5 count=6 recommend=1  orderBy=1 lg='en']
+			<ul>
+				<li class="tjimg"><a href="${url}" target="_blank"><img src="${tj.coverPath}" width="95px" height="125px" class="border_1_ccc" /></a></li>
+				<li class="tjtitle"><a href="${url}" target="_blank">${tj.title}</a></li>	
+			</ul>
+			[/@dbh_content_list]
+		</div>
+		
+		<div class="right_ad">[@dbh_ad id='774']<img src="${filePath}" width="200px" height="200px" />[/@dbh_ad]</div>
+		
+		
+			<div class="right_ad">[@dbh_ad id='783']<img src="${filePath}" width="200px" height="200px" />[/@dbh_ad]</div>
+	</div>
+	<div class="ad">[@dbh_ad id='767']<img src="${filePath}" width="980px" height="100px" />[/@dbh_ad]</div>
+    <div style="height:1px; width:100%; clear:both;"></div>
+</div>
+[#include "/footer.html"]
+</body>
+</html>

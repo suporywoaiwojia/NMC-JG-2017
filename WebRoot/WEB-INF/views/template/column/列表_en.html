@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+<title>草原文化数字化创意资源平台</title>
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+<link href="${basePath}css/pagination.css" rel="stylesheet" type="text/css" media="screen"> 
+<link type="text/css" rel="stylesheet" href="${basePath}css/en/list_en.css" />
+<script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+
+
+
+
+</head>
+
+<body>
+<!--统一头部开始-->
+[#include "/en/header_en.html"]
+<!--统一头部结束-->
+<!-- 导航 -->
+	<div class="dh_nav"><!--style="width:980px; height:30px; margin:auto "-->
+    	<div class="dh"><div class="dhimg"></div>Position : Index[@dbh_bot columnId=flag var="list" lg='en']<a href="${url}" target="_self">${lg_name}</a> > [/@dbh_bot]</div>
+    </div>
+<!-- 导航结束-->
+
+
+    
+    <div class="dh_main">
+    
+    
+    <!-- 左侧DIV开始-->
+    
+    <!-- 分类检索 -->
+	<div class="dh_fljs">
+    	[#include "/en/list-left_en.html"]
+	</div>
+	<!-- 检索结束 -->
+    <!-- 右侧DIV开始 -->
+    <div class=" dh_main_right">
+    [#assign type=parentid /]	
+		[#include "/en/list-search_en.html"]
+	
+    <!-- 列表开始 -->
+        <div class="listbox">
+		[@dbh_content_page var='lblist' lg='en']
+		 [#if url!=""]
+			<ul class="dhlist">
+			<li class="imgbox">
+				<a href="${url}" target="_blank">  [#if lblist.contentType!="6"]<img src="${lblist.coverPath}" width="175px" height="110px"   class="dh_border_1_c"/>[#else]<img src="${basePath}images/jb_c.jpg" width="175px" height="110px"   class="dh_border_1_c"/>[/#if]</a>
+			</li>
+			<li class="listtitle"><a href="${url}" target="_blank">[#if lblist.title?length lte 20] 
+				${lblist.title}
+				[#else] 
+				${lblist.title[0..20]}...[/#if] </a></li>
+			<li class="hits">${hits}&nbsp;</li>
+		   </ul>
+		   [#else]
+		   	<label class="dh_wjcd">Sorry!</label>
+		   [/#if]
+		  [/@dbh_content_page]
+	    
+       </div>
+	<!-- 列表结束 -->
+    <!-- 翻页 -->
+    	<div style="float:left; width:750px; vertical-align:middle; margin-top:30px">
+		<table style=" margin:auto;" ><tr><td style="text-align:center">
+		[#import "common-pagination_en.ftl" as allBase]
+						[@allBase.pagination][/@allBase.pagination]
+		</td></tr></table>
+			
+		
+		</div>
+    
+	</div>
+ <div class="ad">[@dbh_ad id='767']<img src="${filePath}" width="980px" height="100px" />[/@dbh_ad]</div>
+</div>
+
+<!--统一底部开始-->
+[#include "/footer.html"]
+<!--统一底部结束-->
+</body>
+
+</html>

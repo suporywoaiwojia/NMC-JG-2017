@@ -1,0 +1,488 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+
+
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<link type="text/css" rel="stylesheet" href="${basePath}component/js-fileupload/client/css/uploadify.css" /> 
+
+ <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../component/js-fileupload/client/jquery.uploadify.js"></script>
+<script type="text/javascript" src="${basePath}component/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	var files = $('input[name="upload_cover"]');
+			
+					files.render({
+						buttonClass: 'custom',
+						savePath: 'website/www/contentMember/image/',
+					
+						httpPath: 'website/www/contentMember/image/',
+						basePath: '${basePath}',
+						fileTypeExts : '*.gif; *.jpg; *.png; *.bmp; *.jpeg',
+						componentPath: '${basePath}component/js-fileupload/client/',
+						type: 'image',
+						callback: function(fileElement, file, saveFile, httpFile){
+							var index = file.lastIndexOf('.');
+							var ext = file.substring(index, file.length);
+							
+							$('#image1').val(httpFile + ext);
+						
+							
+						}
+					});
+					
+				files.preview(files.attr('title'));
+	$("#member_eidt").css("display","none");
+	$("#password_edit").css("display","none");
+  $("#modifyxinxi").click(function(){
+  		$("#member").css("display","none");
+		$("#member_eidt").css("display","block");
+  });
+  
+   $(".modifya").click(function(){
+  		$("#member").css("display","none");
+		$("#password_edit").css("display","block");
+  });
+});
+</script>
+<title>个人园地-草原文化数字化创意资源平台</title>
+</head>
+<body >
+[#include "/header.html"]
+[@dbh_servlet scope="session" name="loginid" var='loginid']
+			[@dbh_member id=loginid var="member"]
+<div class="wrap">
+	
+
+	<div class="ctrl">
+		
+		<ul>
+			<li class="member">
+				个人园地
+			</li>
+			<li class="personalinfo current" data-for="xinxi">
+				<a href="${memberUrl}">个人信息</a>
+			</li>
+			<li class="collection" data-for="shoucang">
+				<a href="${favoriteUrl}">收藏记录</a>
+			</li>
+			<li class="watchrecord" data-for="guankan">
+				<a href="${viewUrl}">观看记录</a>
+			</li>
+			<li class="member">
+				会员管理
+			</li>
+			<li class="consumerecord" data-for="xiaofei">
+				<a href="${consumeUrl}">消费记录</a>
+			</li><li class="paymentrecord" data-for="jiaofei">
+				<a href="${payUrl} ">缴费记录</a>
+			</li>
+			</li>
+			<li class="paymentrecord" >
+				<a href="http://www.anda9.net/action/re_pay " target="_blank">会员缴费</a>
+			</li>
+		
+			
+		</ul>
+
+	</div>
+	
+	<!--密码修改 -->
+	<div class="show" id="password_edit">
+		<div class="showcontent">
+			<h3>修改密码</h3>
+			<form id="formP">
+			<input type="hidden" name="image" id="image" value="${member.image}" />
+			<input type="hidden" name="tel" id="tel" value="${member.tel}" />
+			<input type="hidden" name="sex" id="sex" value="${member.sex}" />
+			<input type="hidden" name="birthday" id="birthday" value="${member.birthday}" />
+			<input type="hidden" name="nickname" id="nickname" value="${member.nickname}" />
+			<input type="hidden" name="id" id="id" value="${member.id}" />
+			<div class="rows rowsP margintop100">
+				<div class="cols11">当前密码：</div>
+				<div class="cols12"><input type="password" class="inputP" id="oldpw"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="rows rowsP">
+				<div class="cols11">新密码：</div>
+				<div class="cols12"><input type="password" class="inputP" id="password" name="password"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="rows rowsP">
+				<div class="cols11">确认新密码：</div>
+				<div class="cols12"><input type="password" class="inputP" id="pw" name="pw"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="rows rowsP">			
+				<div class="cols11"></div>
+				<div class="cols12">
+					<p class="inputmes1" id="inputmes1"></p>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="rows rowsP">			
+				<div class="cols11"></div>
+				<div class="cols12">
+					<a href="javascript:;" class="modifyxinxi nomargintop" id="pwsubmit">立即修改</a>
+				</div>
+				<div class="clear"></div>
+			</div>
+			</form>
+			
+		</div>
+	</div>
+	
+	<!--信息修改 -->
+	<div class="show" id="member_eidt">
+		<div class="showcontent">
+			<h3>修改个人信息</h3>
+			<form id="form1" name="form1" method="post"  >
+				<div class="rows rowsP">
+					<div class="cols11">头像：</div>
+					<div class="cols12"><input type="file" id="upload_cover" name="upload_cover"  title="${member.image}" />
+					<input type="hidden" name="image" id="image1" value="${member.image}" /></div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsP margintop100">
+					<div class="cols11">昵称：</div>
+					<div class="cols12"><input type="text" class="inputP" id="nickname1" name="nickname" value="${member.nickname}"></div>
+					<div class="clear"></div>
+				</div>
+				
+				<div class="rows rowsP">
+					<div class="cols11">电话：</div>
+					<div class="cols12"><input type="text" class="inputP" id="tel1" name="tel" value="${member.tel}"></div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsP">
+					<div class="cols11">生日：</div>
+					<div class="cols12"><input type="text" class="inputP" id="birthday1"  name="birthday" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd '})" value="${member.birthday}" readonly="readonly"></div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsP">
+					<div class="cols11">性别：</div>
+					<div class="cols12">
+					<label for="male"><input type="radio" name="sex1" id="sex1" value="1"> 男</label>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<label for="female"><input type="radio" name="sex1" id="sex1" value="2"> 女</label>
+					 <input type="hidden" name="sex" id="sex"  value='${member.sex}' />
+					<input type="hidden" name="password" id="password" value="${member.password}" />
+					<input type="hidden" name="id" id="id" value="${member.id}" />
+					</div>
+					  <script type="text/javascript">
+					  $(function(){
+					  	if('${member.sex}'=='0')
+							$("input[name='sex1'][value='0']").attr("checked",true); 
+						if('${member.sex}'=='1')
+							$("input[name='sex1'][value='1']").attr("checked",true); 
+						if('${member.sex}'=='2')
+							$("input[name='sex1'][value='2']").attr("checked",true);
+					  });	
+					  </script>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsP">			
+					<div class="cols11"></div>
+					<div class="cols12">
+						<p class="inputmes" id="inputmes2"></p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsP">			
+					<div class="cols11"></div>
+					<div class="cols12">
+						<a href="javascript:;" class="modifyxinxi nomargintop" id="submit">立即修改</a>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</form>
+			
+		</div>
+	</div>
+	
+	
+	
+	<!--会员信息 -->
+	<div class="show" id="member">
+		<div class="showcontent xinxi" id="xinxi">
+			<h3>个人信息</h3>
+			<div class="shuoming">
+				<div class="rows rowsxinxi">			
+					<div class="cols11 cols11touxiang">头像：</div>
+					<div class="cols12">
+						
+						<div class="faceimgbox">
+						<img src="[#if member.image!='']${member.image}[#else ]../images/face.jpg[/#if]" class="faceimg">
+						
+							
+						</div>
+						
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsxinxi">			
+					<div class="cols11">登录账号：</div>
+					<div class="cols12">${member.loginid}&nbsp;</div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsxinxi">			
+					<div class="cols11">昵称：</div>
+					<div class="cols12">${member.nickname}&nbsp;</div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsxinxi">			
+					<div class="cols11">性别：</div>
+					<div class="cols12">
+					[#if member.sex==1]男[/#if]
+					[#if member.sex==2]女[/#if]
+					&nbsp;</div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsxinxi">			
+					<div class="cols11">生日：</div>
+					<div class="cols12">${member.birthday}&nbsp;</div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsxinxi">			
+					<div class="cols11">邮箱：</div>
+					<div class="cols12">${member.mail}&nbsp;</div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsxinxi">			
+					<div class="cols11">电话：</div>
+					<div class="cols12">${member.tel}&nbsp;</div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsxinxi">			
+					<div class="cols11">密码：</div>
+					<div class="cols12"><a href="#" class="modifya">更改</a></div>
+					<div class="clear"></div>
+				</div>
+				
+				<div class="rows rowsxinxi">			
+					<div class="cols11">状态：</div>
+					<div class="cols12">
+					[#if member.state==0]禁用[/#if]
+					[#if member.state==1]正常[/#if]
+					&nbsp;</div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsxinxi">			
+					<div class="cols11">积分：</div>
+					<div class="cols12">${member.score}&nbsp;</div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsxinxi">			
+					<div class="cols11">会员有效期：</div>
+					<div class="cols12">${member.eTime}&nbsp;</div>
+					<div class="clear"></div>
+				</div>
+				<div class="rows rowsxinxi">			
+					<div class="cols11"></div>
+					<div class="cols12">
+						<a href="#" class="modifyxinxi" id="modifyxinxi">修改个人信息</a>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+
+	
+	
+</div>
+<script type="text/javascript">
+	
+	$(function(){
+
+		$("#submit").click(function(e){
+
+			e.preventDefault();
+
+			var $this = $(this);
+
+			if($this.hasClass("disable")) return;
+
+			$this.addClass("disable").css({"background":"#50a6ef"}).html("提交中 ...");
+			
+			if($("#nickname1").val() == ""){
+				$("#inputmes2").html("请填写用户昵称！");
+				$this.removeClass("disable").css({"background":"#1b80cf"}).html("立即修改");
+				return;
+			}
+			
+			if($("#tel1").val() == ""){
+				$("#inputmes2").html("请填写手机号码！");
+				$this.removeClass("disable").css({"background":"#1b80cf"}).html("立即修改");
+				return;
+			}
+			if($("#birthday1").val() == ""){
+				$("#inputmes2").html("请选择生日！");
+				$this.removeClass("disable").css({"background":"#1b80cf"}).html("立即修改");
+				return;
+			}
+			if(!$("input[name='sex1']:checked").length){
+				$("#inputmes2").html("请选择性别！");
+				$this.removeClass("disable").css({"background":"#1b80cf"}).html("立即修改");
+				return;
+			}
+			$('#sex').val($('input[name="sex1"]:checked').val());
+		
+
+			//至此无问题，提交
+			var url="${basePath}/action/member/submit";
+					$.ajax({type:"POST", url:url,dataType: "html",data:$('#form1').serialize(), success:function(datas) {
+						//var win = art.dialog.top;
+						
+						if(datas=="修改成功！"){
+							$this.addClass("disable").css({"background":"#50a6ef"}).html("修改成功 3");
+							
+							clearInterval(timer);
+							var n=2;
+							var timer = setInterval(function(){
+								if(n<=0){
+									
+									$this.removeClass("disable").css({"background":"#1b80cf"}).html("立即修改");
+									clearInterval(timer);
+									$("#member_eidt").hide();
+									$("#member").fadeIn();	
+									return;
+								}
+								$this.html("修改成功 "+n);
+								n--;
+							},1000);
+
+
+						}else{
+							$this.css({"background":"#50a6ef"}).html("修改失败");
+							$("#member").css("display","none");
+							$("#password_edit").css("display","none");
+						}
+					 //win.location.reload();
+					
+					}, error: function(data) {
+                        alert("error:"+data.responseText);
+                     }
+
+					});
+
+		});
+
+
+		//输入框事件监听
+		$("#nickname1").focus(function(){$("#inputmes2").html("");});
+		$("#tel1").focus(function(){$("#inputmes2").html("");});
+		$("#birthday1").focus(function(){$("#inputmes2").html("");});
+
+
+	});
+
+
+	$(function(){
+
+		$("#pwsubmit").click(function(e){
+
+			e.preventDefault();
+
+			var $this = $(this);
+
+			if($this.hasClass("disable")) return;
+			$this.addClass("disable").css({"background":"#50a6ef"}).html("提交中 ...");
+
+			if($("#oldpw").val() == ""){
+				$("#inputmes1").html("请填写当前密码！");
+				$this.removeClass("disable").css({"background":"#1b80cf"}).html("立即修改");
+				return;
+			}
+			if($("#password").val() == ""){
+				$("#inputmes1").html("请填写新密码！");
+				$this.removeClass("disable").css({"background":"#1b80cf"}).html("立即修改");
+				return;
+			}
+			if($("#pw").val() == ""){
+				$("#inputmes1").html("请确认新密码！");
+				$this.removeClass("disable").css({"background":"#1b80cf"}).html("立即修改");
+				return;
+			}
+			if($("#password").val() != $("#pw").val()){
+				$("#inputmes1").html("两次密码输入不一致，请重新填写！");
+				$this.removeClass("disable").css({"background":"#1b80cf"}).html("立即修改");
+				return;
+			}
+			//至此无问题，提交
+			var url="${basePath}/action/pcheck/"+$("#oldpw").val();
+					$.ajax({type:"POST", url:url,dataType: "html",data:$('#formP').serialize(), success:function(datas) {
+						//var win = art.dialog.top;
+						
+						if(datas=="true"){
+							var url1="${basePath}/action/member/submit";
+							$.ajax({type:"POST", url:url1,dataType: "html",data:$('#formP').serialize(), success:function(datas) {
+						//var win = art.dialog.top;
+						
+								if(datas=="修改成功！"){
+								$this.addClass("disable").css({"background":"#50a6ef"}).html("修改成功 3");
+
+								clearInterval(timer1);
+								var n=2;
+								var timer1 = setInterval(function(){
+									if(n<=0){
+										
+										$this.removeClass("disable").css({"background":"#1b80cf"}).html("立即修改");
+										clearInterval(timer1);
+										$("#password_edit").hide();
+										$("#member").fadeIn();	
+										return;
+									}
+									$this.html("修改成功 "+n);
+									n--;
+								},1000);
+							}else{
+							$this.css({"background":"#50a6ef"}).html("修改失败");
+								$("#member_eidt").css("display","none");
+								$("#member").css("display","none");
+							}
+					 //win.location.reload();
+					
+							}, error: function(data) {
+							alert("error:"+data.responseText);
+							 }
+
+						});
+						
+						}else{
+							$("#inputmes").html("当前密码输入错误！");
+							$this.removeClass("disable").css({"background":"#1b80cf"}).html("立即修改");
+							return;
+						}
+					 //win.location.reload();
+					
+					}, error: function(data) {
+                        alert("error:"+data.responseText);
+                     }
+
+					});
+		
+
+		});
+
+		//输入框事件监听
+		$("#oldpw").focus(function(){$("#inputmes1").html("");});
+		$("#password").focus(function(){$("#inputmes1").html("");});
+		$("#pw").focus(function(){$("#inputmes1").html("");});
+
+	});
+
+</script>
+[/@dbh_member]
+[/@dbh_servlet ]
+
+</body>
+
+<script type="text/javascript" src="../../../js/login.js"></script>
+[#include "/footer.html"]
+ </html>

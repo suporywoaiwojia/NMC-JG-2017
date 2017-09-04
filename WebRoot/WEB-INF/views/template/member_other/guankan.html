@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+
+<script type="text/javascript" src="../../../js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../../css/main.css">
+<title>个人园地-草原文化数字化创意资源平台</title>
+</head>
+<body>
+[#include "/header.html"]
+<div class="wrap">
+	
+[@dbh_servlet scope="session" name="loginid" var='loginid']
+			[@dbh_member id=loginid var="member"]
+	<div class="ctrl">
+		
+		<ul>
+			<li class="member">
+				个人园地
+			</li>
+			<li class="personalinfo " data-for="xinxi">
+				<a href="${memberUrl}">个人信息</a>
+			</li>
+			<li class="collection" data-for="shoucang">
+				<a href="${favoriteUrl}">收藏记录</a>
+			</li>
+			<li class="watchrecord current" data-for="guankan">
+				<a href="${viewUrl}">观看记录</a>
+			</li>
+			<li class="member">
+				会员管理
+			</li>
+			<li class="consumerecord" data-for="xiaofei">
+				<a href="${consumeUrl}">消费记录</a>
+			</li>
+			<li class="paymentrecord" data-for="jiaofei">
+				<a href="${payUrl} ">缴费记录</a>
+			</li>
+			<li class="paymentrecord" >
+				<a href="http://www.anda9.net/action/re_pay " target="_blank">会员缴费</a>
+			</li>
+		</ul>
+
+	</div>
+[/@dbh_member]
+[/@dbh_servlet ]
+	<div class="show">
+		<div class="showcontent guankan" id="guankan">
+			<h3>观看记录</h3>
+			[@dbh_servlet scope="session" name="nickname" var='nickname']
+			<h4>会员名称：<a href="#">${nickname}</a></h4>
+			[/@dbh_servlet]
+			<ul class="shoucanglist">
+			[@dbh_member_viewlist  count=12 var="vl"]
+				<li>
+					<a href="#" class="closeicon" alt="删除记录"  onclick="delViewRecord(${vl.memberid},${vl.id})"><img src="../../../images/closeicon3.png"></a>
+					<a target="_blank" href="${vl.url}"><img src="${vl.coverPath}"></a>
+					<span><a target="_blank" href="${vl.url}">${vl.title}</a></span>
+				</li>
+			[#assign x=c_Page /]	
+			[#assign y=t_Pages /]
+			[/@dbh_member_viewlist]
+				
+				
+			</ul>
+
+			<div class="clear"></div>
+	[#import "member_common-pagination.ftl" as allBase]
+						[@allBase.pagination listDynamics=0 currentPage=x totalPages=y][/@allBase.pagination]
+			<!--<div class="pages">
+				
+				<ul>
+					<li class="pageprev"><span>上一页</span></li>
+					<li class="current"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li class="nomarginright">...</li>
+					<li><a href="#">5</a></li>
+					<li class="pagenext"><a href="#">下一页</a></li>
+				</ul>
+
+			</div> -->
+			<div class="clear"></div>
+
+			<div class="shuoming">
+				<p>* 此处仅显示非免费视频的300条观看记录</p>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+
+
+</div>
+
+<script type="text/javascript" src="../../../js/login.js"></script>
+
+[#include "/footer.html"]
+</body>
+</html>

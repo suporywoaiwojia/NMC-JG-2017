@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+[@dbh_content]
+
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+<link rel="stylesheet" type="text/css" href="../css/reveal-y.css">
+<link type="text/css" rel="stylesheet" href="${basePath}css/jub.css" />
+
+<title>[@dbh_website]${webName}[/@dbh_website] - ${content.title}</title>
+<script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../js/jquery.reveal-y.js"></script>
+<script type="text/javascript" src="${basePath}js/login.js"></script>
+
+
+</head>
+[#include "/header.html"]
+<input type="hidden" id="pay" value="${content.column.pay}" />
+<input type="hidden" id="type" value="nv" />
+<a href="javascript:;" data-reveal-id="myModal" id="showMyModal"></a>
+	<div id="myModal" class="reveal-modal">
+		<h3 id="al"></h3>
+		<div class="msgbox">
+			<a id="msg"></a>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+<div style="width:980px;margin: 0 auto;">
+	<div class="content">
+		<div class="dh"><div class="dhimg"></div>当前位置：[@dbh_bot columnId=content.column.id var="list"]<a href="${url}" target="_self">${list.name}</a> > [/@dbh_bot]${content.title}</div>
+			
+		
+		
+		<div>
+		
+			<div style="margin-top:15px; color:#1b80cf" >上传时间：${content.creatDate}</div>
+			
+			<div  style="margin-top:15px;color:#1b80cf" >文件名称：${content.documentName}</div>
+		
+			<div  style="margin-top:15px;color:#FF0000">版权信息：站内全部“剧本”，版权为内蒙古安达文化传媒责任有限公司所有</div>
+		</div>
+		<div class="preview">
+		
+					
+					<embed src="${content.documentPath}" height="800px" width="980px" allowFullScreen="true">
+					</embed>
+		</div>
+
+		<div style="float:left; width:980px">
+			<div class="share">
+					<div class="bshare-custom"  style="font-size:16px; line-height:26px"><img src="../../images/shoucang1.png"  onclick="favoriteRecord(b)"  style="cursor:pointer"/> <label onclick="favoriteRecord(b)"  style="cursor:pointer">收藏</label>
+									<!--<a title="分享到" href="http://www.bShare.cn/" id="bshare-shareto" class="bshare-more">分享到</a> -->
+									<a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+									<a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a>
+									<a title="分享到网易微博" class="bshare-neteasemb"></a>
+									<a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+									<span class="BSHARE_COUNT bshare-share-count">0</span>
+								</div>
+								<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+						
+			</div>
+			<div style="float:right; margin:0 10px 0 65px; line-height:41px">浏览量：${hits}</div>
+		</div>
+		[#if content.column.comments!=3]
+		<div class="comment">
+			<div style="width:760px;">
+				
+							
+							<iframe  id="comment" name="discussFrame" width="100%" frameborder=0  allowtransparency="true" 
+								marginheight=0  marginwidth=0  scrolling="no"  style="z-index:9999" src="${basePath}action/content/comment/${content.id}"></iframe>
+							
+					
+			</div>
+		</div>
+		[/#if]
+</div>
+
+	<div class="adb">[@dbh_ad id='767']<a href="${link}" target="_blank"><img src="${filePath}" width="980px" height="100px" /></a>[/@dbh_ad]</div>
+	<script type="text/javascript">
+
+var b=["${content.title}","page/${content.id}.html","${content.coverPath}"];
+
+</script>
+</div>
+</body>
+${pageView}
+[/@dbh_content]
+[#include "/footer.html"]
+</html>
+

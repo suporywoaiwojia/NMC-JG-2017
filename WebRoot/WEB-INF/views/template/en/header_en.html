@@ -1,0 +1,175 @@
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+<link type="text/css" href="${basePath}css/en/styles.css" rel="stylesheet" />
+<link type="text/css" href="${basePath}css/headerlogin.css" rel="stylesheet" />
+<link rel="stylesheet" href="${basePath}js/login-reveal/reveal.css">
+
+<script type="text/javascript" src="${basePath}js/login-reveal/jquery.reveal.js"></script>
+<script type="text/javascript" src="${basePath}js/jquery.cookie.js"></script>
+
+
+<script type="text/javascript">
+$(function(){
+				$("#searchSub").click(function(){
+					
+					var key=encodeURI(encodeURI($('#searchInput').val()));
+					if(key==""){
+						alert("Please Input Search Key!");
+						return false;
+					}else{
+						window.open('${basePath}action/search/en/'+key+'/1');
+					}
+				});
+});
+</script>
+<div class="site-nav">
+  <div class="site-nav-bd">
+    <div class="site-nav-bd-l">
+      <img class="g" src="${basePath}images/head/g.png" />
+      <a href="#">Favorites</a>
+    </div>
+    <div class="site-nav-bd-r" style="width:780px">
+	<li class="site-nav-bd-r-menu">
+        <a href="http://tsg.anda9.net"  target="_blank">Library Web</a>
+      </li>
+      <li class="site-nav-pipe">|</li>
+	  <li class="site-nav-bd-r-menu">
+        <a href="http://child.anda9.net"  target="_blank">Kindergarten Web</a>
+      </li>
+      <li class="site-nav-pipe">|</li>
+      <li class="site-nav-bd-r-menu">
+        [@dbh_channel id=9 ]<a href="${url}">About Us</a>[/@dbh_channel]
+      </li>
+      <li class="site-nav-pipe">|</li>
+      <li class="site-nav-bd-r-menu">
+        <a href="#">Customer service</a>
+      </li>
+      <li class="site-nav-pipe">|</li>
+      <li class="site-nav-bd-r-menu" id="welcome">
+       Welcome！
+        <span id="headuser">
+            <a href="#" id="link" target="_self" data-reveal-id="myModal">[Member Login]</a>
+          <a href="${basePath}action/register" target="_blank">[Member Register]</a>
+        </span>
+      </li>  
+    </div>
+  </div>
+</div>
+<!--标头区-->
+<div class="header">
+<div class="header-bd">
+    <div class="logo_en"></div>
+    <div class="input-box">
+      <input class="input-box-s"  placeholder="Search" id="searchInput"></input>
+      <div class="inpur-box-search_en" id="searchSub"></div>
+    </div>
+    <!--<div class="menu">
+      <li class="menu-upload">
+        <a href="#">上传</a>
+      </li>
+      <li class="up">
+        <img src="${basePath}images/head/up.png" />
+      </li>
+      <li class="menu-history">
+        <a href="http://www.anda9.net/action/member/2/1">观看记录</a>
+      </li>
+    </div>-->
+  </div>  
+</div>
+
+
+<div class="nav">
+  <div class="nav-bd">
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'"><a class="aa" href="http://www.anda9.net/action/en/index">Index</a></div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=2 lg='en']
+	<a class="aa" href="${url}">${name}</a>
+	[/@dbh_channel]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=3 lg='en']
+	<a class="aa" href="${url}">${name}</a>
+	[/@dbh_channel]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=4 lg='en']
+	<a class="aa" href="${url}">${name}</a>
+	[/@dbh_channel]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=5 lg='en']
+	<a class="aa" href="${url}">${name}</a>
+	[/@dbh_channel ]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=6 lg='en']
+	<a class="aa" href="${url}">${name}</a>
+	[/@dbh_channel]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=7 lg='en']
+	<a class="aa" href="${url}">${name}</a>
+	[/@dbh_channel]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=8 lg='en']
+	<a class="aa" href="${url}">${name}</a>
+	[/@dbh_channel]
+	</div>
+
+  </div>
+</div>
+<div id="myModal" class="reveal-modal">
+			<div class="zhezhao"></div>
+				<div class="bg-log">
+				  <div class="error"></div>
+				  <form id="member-login" method="post" >
+				  <table class="tabs1">
+					<tbody>
+					  <tr>
+						<th>账&nbsp;号：</th>
+						<td>
+						  <div class="acountBorder">
+							<input placeholder="请输入登录手机号" class="in-txt" id="loginid" name="loginid" class="login-id">
+						  </div>
+						</td> 
+					  </tr>
+					  <tr>
+						<th>密&nbsp;码：</th>
+						<td>
+						  <div class="acountBorder">
+							<input placeholder="请输入密码" class="in-txt" id="password" name="password" type="password" class="login-pw">
+						  </div>
+						</td> 
+					  </tr>
+					  <tr>
+						<th></th>
+						<td class="itemreglast">
+						  <div class="logauto">
+							<input type="checkbox" id="remember"  name="remember"/><span>记住我</span>
+						  </div>
+						  <div class="logautoright">
+							<a href="${basePath}action/findpassword" target="_blank">找回密码</a>
+							<i class="line"></i>
+							<a href="${basePath}action/register" target="_blank">立即注册</a>
+						  </div>
+						</td> 
+					  </tr>
+					  <tr>
+						<th></th>
+						<td>
+						  <div class="login-k">
+							<a   class="login-bg">登录</a>  
+						  </div>
+						</td> 
+					  </tr>
+					</tbody>
+				  </table>
+				  </form>
+				
+				  <a class="close-reveal-modal">&#215;</a>  
+				</div>
+		
+		</div>

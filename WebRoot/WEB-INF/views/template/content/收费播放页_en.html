@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+[@dbh_content]
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+<link type="text/css" rel="stylesheet" href="${basePath}css/sfplay.css" />
+<link type="text/css" rel="stylesheet" href="${basePath}css/discussNew.css" />
+<link rel="stylesheet" type="text/css" href="../css/reveal-y.css">
+<script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${basePath}js/login.js"></script>
+<script type="text/javascript" src="../js/jquery.reveal-y.js"></script>
+<script type="text/javascript">
+
+var b=["${content.title}","page/${content.id}.html","${content.coverPath}"];
+viewRecord(b);
+</script>
+<SCRIPT LANGUAGE=JavaScript>
+<!--
+function getEnd(pars){$('.signin').click();}
+function getLight(pars){if(pars=="open"){close_light(this)}else{close_light(this)}};function thisMovie(movieName){if(navigator.appName.indexOf("Microsoft")!=-1){return window[movieName]}else{return document[movieName]}}
+//-->
+</SCRIPT>
+<style>
+.video_p { OVERFLOW: hidden; WIDTH: 100%; POSITION: relative}
+.close_light_bg {DISPLAY: none; BACKGROUND: #000; FILTER: alpha(opacity = 95); LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; opacity: .895}
+</style>
+<title>${content.title}-[@dbh_website]${webName}[/@dbh_website]</title>
+</head>
+
+<body >
+<a href="javascript:;" data-reveal-id="myModal" id="showMyModal" ></a>
+<div id="myModal" class="reveal-modal">
+	<h3 id="al"></h3>
+	<div class="msgbox">
+		<a id="msg"></a>
+	
+	</div>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+[#include "/en/header_en.html"]
+<input type="hidden" id="pay" value="${content.column.pay}" />
+<div class="dh"><div class="dhimg"></div>Position : Index[@dbh_bot columnId=content.column.id var="list" lg='en']<a href="${url}" target="_self">${lg_name}</a> > [/@dbh_bot]${content.title}</div><h3>${content.title}</h3>
+<script type="text/javascript" src="${basePath}component/kbplay/swfobject.js"></script>
+<div class="video">
+	<div class="player">
+		[#list file as f]
+			[#if f_index==0]
+		  	<div id="CuPlayer" class="video_p">
+			
+				
+			<SCRIPT LANGUAGE=JavaScript>
+			vPl(980,485,"${f.id}","CuPlayer");
+			//vPl(980,485,"${f.path}","CuPlayer");
+
+//-->
+</SCRIPT> 
+
+<SCRIPT language=javascript src="${basePath}component/kbplay/action.js" type=text/javascript></SCRIPT>
+			</div>
+			<div id="pl1" style="display:none;;width:980px;height:485px; clear:both; ">
+			[#if f.name?index_of(".swf") >1]
+				<embed src="${f.path}" height="485px" width="980px" allowFullScreen="true">
+				<!--<embed src="${f.path}" height="485px" width="980px" allowFullScreen="true">-->
+				</embed>
+			[/#if]
+			</div>
+		
+		<script>
+		
+			 var fileExtend="${f.name}".substring("${f.name}".lastIndexOf('.')).toLowerCase();
+			 if(fileExtend==".swf"){
+			 
+			 	$("#CuPlayer").hide();
+				$("#pl1").show();
+			 }
+      	
+		</script>
+		[/#if]
+		[/#list]
+	</div>
+</div>
+<div style="clear:both; height:1px; width:100%; "></div>
+<div >
+	<div class="content">
+        <!--mian2_left-->
+		<div class="share"  style="width:450px">
+			<div class="bshare-custom"  style="font-size:16px; line-height:26px"> <img src="../../images/shoucang1.png" onclick="favoriteRecord(b)" style="cursor:pointer"/> <label onclick="favoriteRecord(b)" style="cursor:pointer">Collection</label>
+							<!--<a title="分享到" href="http://www.bShare.cn/" id="bshare-shareto" class="bshare-more">分享到</a> -->
+							<a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+							<a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a>
+							<a title="分享到网易微博" class="bshare-neteasemb"></a>
+							<a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+							<span class="BSHARE_COUNT bshare-share-count">0</span>
+			</div>
+			<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+			<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+				
+		</div>
+       
+		<div style="float:left; margin:0 10px 0 65px; line-height:41px">Hits:${hits}
+		
+		</div>
+		<div style="margin:20px 0 10px 0px; float:left; width:750px"><br />
+
+        </div>
+        <!--        多看寓言故事开发儿童想象力和思维能力，引起儿童对事物的好奇心。培养儿童性格。<br />
+        可以从中得出一些道理，而且易懂，年龄多大的都能看，而且童话充满纯真，使人可以拥有纯真 ，而且童话可以教育他人-->
+         
+		<div style="margin:0 0px 30px 0px; font-size:12px; float:left; width:750px">
+        [#list file as f]
+			[#if f_index==0]
+		${f.detailed}
+        [/#if]
+		[/#list]
+		</div>
+			
+		<div  class="comment">
+			<ul class="leftIndexInfo">
+					<li class="discussBox" >
+						[#if content.column.comments!=3]
+						<iframe  id="comment" name="discussFrame" width="100%" frameborder=0  allowtransparency="true" 
+							marginheight=0  marginwidth=0  scrolling="no"  style="z-index:9999" src="${basePath}action/content/comment/en/${content.id}"></iframe>
+						[/#if]
+					</li>
+				</ul>
+		</div>
+        <!--mian2_left end-->
+        <!--mian2_right-->
+		<div  class="recommend">
+		<font style="font-size:16px; color:#666">Recommend>></font>
+		[@dbh_content_list var='dbhlist' parentId=8 count=4 recommend=1 lg='en']
+		<ul>
+			<li class="play_li" ><a href="${url}" target="_self"><img src="${dbhlist.coverPath}"  width="200px" height="125px"/></a></li>
+			<li class="play_li_n" ><strong>${dbhlist.title}</strong><div class="play_li_no">${hits}&nbsp;</div></li>
+			<li class="comment">
+			[#if dbhlist.summary?length lt 40] 
+				${dbhlist.summary}
+				[#else] 
+				${dbhlist.summary [0..41]}... 
+			[/#if]
+
+			</li>
+		</ul>
+		[/@dbh_content_list]
+		
+		
+		<ul>
+			<li class="ad_right" >[@dbh_ad id='786']<img src="${filePath}" width="200px" height="200px" />[/@dbh_ad]</li>
+		</ul>
+	</div>
+        <!--mian2_right end-->
+	</div>
+
+</div>
+
+<div  style="margin:0 auto; width:980px">[@dbh_ad id='767']<img src="${filePath}" width="980px" height="100px" />[/@dbh_ad]</div>
+[#include "/footer.html"]
+<DIV class="close_light_bg" id="close_light_bg"></DIV>
+</body>
+${pageView}
+[/@dbh_content]
+</html>

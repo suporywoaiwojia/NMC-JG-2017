@@ -1,0 +1,72 @@
+<script type="text/javascript">
+			$(function(){
+					$('#week').hide();
+					$('#month').hide();
+				$('#daytop').click(function(){
+				
+					$('#day').show();
+					$('#week').hide();
+					$('#month').hide();
+					$("#daytop").removeClass().addClass("tops");
+					$("#weektop").removeClass().addClass("topn");
+					$("#monthtop").removeClass().addClass("topn");
+					
+				});
+				$('#weektop').click(function(){
+					$('#day').hide();
+					$('#week').show();
+					$('#month').hide();
+				
+					$("#daytop").removeClass().addClass("topn");
+					$("#weektop").removeClass().addClass("tops");
+					$("#monthtop").removeClass().addClass("topn");
+				
+				});
+				$('#monthtop').click(function(){
+					$('#day').hide();
+					$('#week').hide();
+					$('#month').show();
+					
+					$("#daytop").removeClass().addClass("topn");
+					$("#weektop").removeClass().addClass("topn");
+					$("#monthtop").removeClass().addClass("tops");
+					
+				});
+				;
+			});
+		</script>
+<div class="tops" id="daytop">日排行</div><div class="topn"  id="weektop">周排行</div><div  class="topn" id="monthtop">月排行</div>
+			<ul id="day">
+			[#assign x=0 /]		
+			[@dbh_content_list var='day' channelId=type count=10 top='day']
+			[#assign x=x+1 /]
+			<li class="[#if x<4]topno[#else]topnoa[/#if]">${x}</li>
+			<li class="toptitle"><a href="${url}" target="_blank" title="${day.title}">[#if day.title?length lte 10] ${day.title}[#else] ${day.title [0..10]}... 
+				[/#if]</a></li>
+			
+			[/@dbh_content_list]
+			</ul>
+			
+			<ul id="week"  style="display:none">
+			[#assign y=0 /]		
+			[@dbh_content_list var='week' channelId=type count=10 top='week']
+			[#assign y=y+1 /]
+			<li class="[#if y<4]topno[#else]topnoa[/#if]">${y}</li>
+			<li class="toptitle"><a href="${url}" target="_blank" title="${week.title}">[#if week.title?length lte 10] ${week.title}[#else] ${week.title [0..10]}... 
+				[/#if]</a></li>
+				[/@dbh_content_list]
+			</ul>
+		
+			
+			
+			<ul id="month"  style="display:none">
+			[#assign z=0 /]		
+			[@dbh_content_list var='month' channelId=type count=10 top='month']
+			[#assign z=z+1 /]
+			<li class="[#if z<4]topno[#else]topnoa[/#if]">${z}</li>
+			<li class="toptitle"><a href="${url}" target="_blank" title="${month.title}">
+			[#if month.title?length lte 10] ${month.title}[#else] ${month.title [0..10]}... 
+				[/#if]
+			</a></li>
+			[/@dbh_content_list]
+			</ul>

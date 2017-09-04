@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<link type="text/css" rel="stylesheet" href="../css/public.css" />
+
+<link rel="stylesheet" type="text/css" href="../css/r_p_main.css">
+
+
+<script type="text/javascript" src="../js/scpay.js"></script>
+
+
+<title>会员缴费-草原文化数字化创意资源平台</title>
+
+</head>
+<body >
+[#include "/header.html"]
+<!--支付信息开始-->
+[@dbh_attachment var='ff' attId=flag]
+[@dbh_servlet scope="session" name="loginid" var='loginid']
+<div class="pay-box" id="r-pay-zf">
+  <div class="pay-li-title">
+    <span class="zzdg">您正在订购“素材资源”<span id="r-cp-name"></span></span>
+    <span class="zzdg">当前账号：${loginid}</span>
+    <span class="dqzh" id="r-pay-tel"></span>
+  </div>
+  <div class="pay-li">
+    <div class="slt"><img src="${ff.content.coverPath}" width="240px" height="160px" /></div>
+    <div class="text">
+      <span class="title">您将购买的素材名称：${ff.fileName}<br/></span>
+      <span class="title">素材格式：${ff.fileName?substring(ff.fileName?index_of(".")+1,ff.fileName?length)}<br/></span>
+     
+      <span class="title">价格：￥${ff.price}</span>
+    </div>
+  </div>
+  <div class="pay-li-g"></div>
+  <div class="pay-li-xz">
+    <ul>
+      <li><a href="javascript:;" class="notext zhifubao checked" id="sc-zfb">支付宝</a></li>
+      <li><a href="javascript:;" class="notext yhkzhifu" id="sc-wy">银行卡支付</a></li>
+      <li style="display:none;"><a href="javascript:;" class="notext wxzhifu" id="zhifubaoa">微信支付</a></li>
+    </ul>
+  </div>
+  <!--zfb-->
+  <div class="zfcont" style=" text-align:center;" id="sc-zfb-m">
+    <div class="sfje">实付金额：<span id="r-zfb-j">${ff.price}</span>元</div>
+    <div class="pay-li-btn">
+      <a href="#" class="login-bg" id="sc-zfb-sub">确认支付</a> 
+    </div>
+  </div>
+  <!--wy-->
+    <div class="zfcont" style="display:none" id="sc-wy-m">
+    <h3>网银银行支付 <span class="c999f12">建议您使用IE浏览器。需在银行开通网银，且支付有金额限额</span></h3>
+	<ul class="wangyin" id="wangyinul">
+	  <li class="fleft"><a href="javascript:;" class="notext zhaohang" data-wyid="CMB-DEBIT">招商银行</a></li>
+	  <li class="fleft"><a href="javascript:;" class="notext gonghang" data-wyid="ICBC-DEBIT">中国工商银行</a></li>
+	  <li class="fleft"><a href="javascript:;" class="notext zhonghang" data-wyid="BOC-DEBIT">中国银行</a></li>
+	  <li class="fleft"><a href="javascript:;" class="notext jianhang" data-wyid="CCB-DEBIT">中国建设银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext guangda" data-wyid="CEB-DEBIT">光大银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext nonghang" data-wyid="ABC">中国农业银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext minsheng" data-wyid="CMBC">中国民生银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext jiaohang" data-wyid="COMM-DEBIT">中国交通银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext youzheng" data-wyid="PSBC-DEBIT">中国邮政储蓄</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext pufa" data-wyid="SPDB-DEBIT">浦东发展银行</a></li>
+	  <li class="fleft hide"><a href="javascript:;" class="notext zhongxin" data-wyid="CITIC">中信实业银行</a></li>
+	</ul>
+    <div class="clear"></div>
+	<a href="javascript:;" class="moreyinhang" id="moreyinhang">更多银行</a>
+	<a href="javascript:;" class="otheryinhang hide" id="otheryinhang">选择其他银行</a>
+    <div class="pay-li-btn">
+      <a href="#" class="login-bg" id="sc-wy-sub">确认支付</a> 
+    </div>
+  </div>
+  <!--wx-->
+    <div class="zfcont" style="display:none">
+		<div class="wxzf">
+		  <img src="" />
+		</div>
+		<div class="wxzf">
+		  <span class="ts">请使用微信扫描二维码以完成支付</span>
+		</div>
+		<div class="wxzf">
+		  <span class="jine">¥15</span>
+		</div>
+  </div>
+  
+<form name=scpayment id="scpayment" action="../anda_pay_sub" method="post" target="_blank">
+	 <input type="hidden" id="sc-id" value="${ff.id}" name="sc_id" />
+	 <input  id="sc-price" name="price" type="hidden" value="${ff.price}" />
+	 <input id="sc-loginid" name="loginid" type="hidden"  value="${loginid}"/>
+	 <input type="hidden"  name="pid" id="sc-pid" />
+	 <input  id="sc-paymentName" name="paymentName" type="hidden"  value="素材购买_${ff.id}" />
+	 <input  id="sc-disprice" name="disprice" type="hidden" value="${ff.price}"/>
+	 <input  id="sc-memberid" name="memberid" type="hidden" value="${memberid}" />
+	 <input  id="sc-bankcode" name="bankcode" type="hidden"/>
+ </form>
+ <form name="">
+  <div class="pay-li">
+    <div class="text">
+      <span class="title2">温馨提示：</span>
+      <p>1、套餐到期前一个月前将通知您发起续费，以保证您能够正常的使用本站服务；</p>
+      <p>2、如支付遇到困难、异常、失败等情况，请关闭页面或联系客服帮您解决；</p>
+      <p>3、请保证支付宝账户或关联银行卡余额足够，避免续费失败，影响您的支付成功；</p>
+      <p>4、如有疑问，请拨打400-800-xxxx，安达文化传媒客服竭诚为您服务。</p>
+    </div>
+  </div>
+
+  <a href="javascript:;" data-reveal-id="sc-myModal" id="sc-showMyModal" style="display:none;"></a>
+	<div id="sc-myModal" class="reveal-modal">
+		<h3 style="text-align:center;width:520px;">请不要关闭本页。完成支付后点击已完成支付！</h3>
+		<div id="msg">
+		<a href="#" class="btna fleft" style="margin-left:70px; " id="sc-pay-over">已完成支付</a>
+		<a href="https://cshall.alipay.com/hall/index.htm" class="btna fleft" style="margin-left:70px;" target="_blank" >支付遇到问题</a>
+		</div>
+	</div>
+
+</div>
+[/@dbh_servlet]
+[/@dbh_attachment]
+
+[#include "/footer.html"]
+</body>
+
+ </html>

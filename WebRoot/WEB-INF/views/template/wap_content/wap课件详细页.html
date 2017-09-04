@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link type="text/css" rel="stylesheet" href="../../wap/styles/css/global.css" />
+        <link type="text/css" rel="stylesheet" href="../../wap/styles/css/wapStyle.css" />
+        <script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="${basePath}wap/javascript/wapInfo.js"></script>
+        <script type="text/javascript" src="${basePath}js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="${basePath}js/login.js"></script>
+        <title>[@dbh_website]${webName}[/@dbh_website]</title>
+        <script type="text/javascript">
+	
+			$(document).ready(function(){			
+				var displayInfo="unshow";				
+				$("#HomeButton").click(function(){
+					if(displayInfo=="unshow"){						
+						$("#homeMenuBox").slideDown(1000);
+						displayInfo="show";
+					}
+					else
+					{
+						$("#homeMenuBox").slideUp(1000);
+						displayInfo="unshow";
+					}
+				});	
+				
+				
+				$("#exitLink").click(function(){
+					
+						$("#homeMenuBox").slideUp(1000);
+						displayInfo="unshow";
+					
+				});		
+				
+		    })
+			
+        </script>
+        
+    </head>
+    
+    <body>
+
+        [@dbh_content]       
+        <div id="pageBox" class="pageBox">
+        	<div id="imgBG" class="imgBG">
+            	<!--img src="../../styles/images/pageBG.png" /-->
+            </div>        	
+        </div>
+
+        <div class="contentBox">
+        
+        	<!--  顶部页面的引用  START -->
+			[#include "/wap_header.html"]
+			<!--  顶部页面的引用  END -->
+			
+			<div class="videoImageBox">
+            	<div class="ImageInfo">
+            		[#list file as videoPath]
+                	<a href="${videoPath.wapurl} " target="_top"><img src="${content. coverPath}" width="100%" height="460" /></a>
+                	[/#list]
+                </div>
+            </div>
+            <div class="videoText">
+            	内容介绍:${content.title},${content.coverDescribe}
+            </div>
+        </div>
+        <div class="bottomButtonBox">
+        	<ul class="bottomButton">
+            	<li class="gobackButton"></li>
+            	[#list file as videoPath]
+                <a href="${videoPath.wapurl} " target="_top"><li class="playerButton"></li></a>
+                [/#list]
+            </ul>
+        </div>
+        [/@dbh_content]
+        
+        <div class="homeMenu" id="homeMenuBox">
+        	[@dbh_channel id=62]
+        	<a href="${wapurl}" target="_top"><div class="indexLink"></div></a>
+        	[/@dbh_channel]
+        	<a href="javascript:void(0);" id="linkwap" class="signinwap"><div class="loginLink"></div></a>
+        	<div class="exitLink" id="exitLink"></div>
+        </div>
+        <div class="HomeButton" id="HomeButton"></div>
+    </body>
+</html>

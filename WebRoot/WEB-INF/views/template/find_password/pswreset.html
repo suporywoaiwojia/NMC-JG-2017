@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+<link type="text/css" rel="stylesheet" href="${basePath}css/styles.css" />
+<script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${basePath}js/login.js"></script>
+<title>[@dbh_website]${webName}[/@dbh_website]</title>
+<script type="text/javascript">
+$(function(){
+ $('#sub111').click(function(){	
+
+	
+});
+</script>
+</head>
+
+<body>
+[#include "/header.html"]
+<!--找回密码开始-->
+<form id="member" method="post" action="">
+<div class="findpwd-box" id="f-f">
+  <div class="findpwd-title">找回密码</div>
+  [@dbh_servlet scope="session" name="type" var="type"]
+  [#if type=="2"]
+  <div class="findpwd-bz">
+    <div class="findpwd-bz-hui">
+      <span class="findpwd-bz-xh">1</span>
+      <span class="findpwd-bz-ts">输入您的注册邮箱</span>   
+    </div>
+    <div class="findpwd-bz-hui">
+      <span class="findpwd-bz-xh">2</span>
+      <span class="findpwd-bz-ts">请您查收邮件</span>   
+    </div>
+    <div class="findpwd-bz-lan">
+      <span class="findpwd-bz-xh">3</span>
+      <span class="findpwd-bz-ts">请输入您的新密码</span>   
+    </div>
+  </div>
+   [/#if]
+  [#if type=="1"]
+  	<div class="findpwd-bz-phone">
+    <div class="findpwd-bz-hui">
+      <span class="findpwd-bz-xh">1</span>
+      <span class="findpwd-bz-ts">输入您的注册手机号</span>   
+    </div>
+    <div class="findpwd-bz-lan">
+      <span class="findpwd-bz-xh">2</span>
+      <span class="findpwd-bz-ts">请输入您的新密码</span>   
+    </div>
+  </div>
+  [/#if]
+	[/@dbh_servlet]
+  <div class="findpwd-li">
+    <div class="findpwd-li-xm">设置新密码：</div>
+    <div class="findpwd-li-sr">
+      <input type="password" id="password-1" name="password" />
+    </div>
+    <div class="findpwd-li-zs-1"></div>
+  </div>
+  <div class="findpwd-li">
+    <div class="findpwd-li-xm">重复新密码：</div>
+    <div class="findpwd-li-sr">
+      <input type="password"  id="f-c-password" name="f-c-password" />
+    </div>
+    <div class="findpwd-li-zs"></div>
+  </div>
+  <div class="findpwd-li-btn">
+    <a href="#" class="login-bg" id="f-4-sub">确认修改</a> 
+  </div>
+</div>
+</form>
+<!--找回密码结束-->
+
+<div class="findpwd-box" id="f-fail" style="display:none">
+  <div class="findpwd-title">信息提示</div>
+  <div class="findpwd-li">
+    <div class="ts">密码修改失败</div>
+  </div>
+</div>
+
+<!--找回密码开始-->
+<div class="findpwd-box" id="f-s"  style="display:none">
+
+  <div class="findpwd-title">找回密码</div>
+  <div class="findpwd-cg"><a href="http://www.anda9.net"><img src="${basePath}images/findpwd-cg.gif" /></a></div>
+</div>
+<!--找回密码结束-->
+[#include "/footer.html"]
+</body>
+</html>

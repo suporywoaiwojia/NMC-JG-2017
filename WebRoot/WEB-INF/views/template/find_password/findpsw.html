@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+<link type="text/css" rel="stylesheet" href="${basePath}css/styles.css" />
+<script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${basePath}js/RegExpValidata.js"></script>
+<script type="text/javascript" src="${basePath}js/login.js"></script>
+<title>[@dbh_website]${webName}[/@dbh_website]</title>
+</head>
+
+<body>
+[#include "/header.html"]
+<!--找回密码开始-->
+<div class="findpwd-box" id="f-1">
+  <div class="findpwd-title">找回密码</div>
+  <div class="findpwd-fs" id="telfind"><a href="#"><img src="../images/findpwd-phone.png" /></a></div>
+  <div class="findpwd-fs" id="mailfind"><a href="#"><img src="../images/findpwd-email.png" /></a></div>
+</div>
+<!--找回密码结束-->
+
+<!--找回密码开始-->
+<div class="findpwd-box" style="display:none" id="f-2">
+  <div class="findpwd-title">找回密码</div>
+  <div class="findpwd-bz">
+    <div class="findpwd-bz-lan">
+      <span class="findpwd-bz-xh">1</span>
+      <span class="findpwd-bz-ts">输入您的注册邮箱</span>   
+    </div>
+    <div class="findpwd-bz-hui">
+      <span class="findpwd-bz-xh">2</span>
+      <span class="findpwd-bz-ts">请您查收邮件</span>   
+    </div>
+    <div class="findpwd-bz-hui">
+      <span class="findpwd-bz-xh">3</span>
+      <span class="findpwd-bz-ts">请输入您的新密码</span>   
+    </div>
+  </div>
+  <div class="findpwd-li">
+    <div class="findpwd-li-xm">邮&nbsp;箱：</div>
+    <div class="findpwd-li-sr">
+      <input type="text" name="f-mail" id="f-mail" />
+    </div>
+    <div class="findpwd-li-zs"></div>
+  </div>
+  <div class="findpwd-li-btn">
+    <input type="button" class="login-bg" id="fpsub-m" value="提交申请">
+  </div>
+</div>
+<!--找回密码结束-->
+<!--找回密码开始-->
+<div class="findpwd-box" id="f-3" style="display:none">
+  <div class="findpwd-title">找回密码</div>
+  <div class="findpwd-bz">
+    <div class="findpwd-bz-hui">
+      <span class="findpwd-bz-xh">1</span>
+      <span class="findpwd-bz-ts">输入您的注册邮箱</span>   
+    </div>
+    <div class="findpwd-bz-lan">
+      <span class="findpwd-bz-xh">2</span>
+      <span class="findpwd-bz-ts">请您查收邮件</span>   
+    </div>
+    <div class="findpwd-bz-hui">
+      <span class="findpwd-bz-xh">3</span>
+      <span class="findpwd-bz-ts">请输入您的新密码</span>   
+    </div>
+  </div>
+  <div class="findpwd-li">
+    <div class="ts">请30分钟内登录以下邮箱点击邮件中的链接完成找回密码操作</div>
+  </div>
+  <div class="findpwd-li">
+    <div class="email" id="f-3-mail"></div>
+  </div>
+  <div class="findpwd-li-btn">
+    <a href="#" class="login-bg" target="_blank" id="f-3-a">立即查收邮件</a> 
+  </div>
+</div>
+<!--找回密码结束-->
+<!--找回密码开始-->
+<div class="findpwd-box" id="f-p-1" style="display:none">
+  <div class="findpwd-title">找回密码</div>
+  <div class="findpwd-bz-phone">
+    <div class="findpwd-bz-lan">
+      <span class="findpwd-bz-xh">1</span>
+      <span class="findpwd-bz-ts">输入您的注册手机号</span>   
+    </div>
+    <div class="findpwd-bz-hui">
+      <span class="findpwd-bz-xh">2</span>
+      <span class="findpwd-bz-ts">请输入您的新密码</span>   
+    </div>
+  </div>
+  <form method="post" id="member-f-p">
+  <div class="findpwd-li">
+    <div class="findpwd-li-xm">手机号码：</div>
+    <div class="findpwd-li-sr">
+      <input type="text"  id="f-p-tel" name="tel"/>
+    </div>
+    <div class="findpwd-li-zs" id="f-p-m"></div>
+  </div>
+	<div class="findpwd-li">
+    <div class="findpwd-li-xm">验证码：</div>
+    <div class="findpwd-li-sr">
+      <input type="text" class="yzm" id="f-yzm-1" />
+    
+	  <input type="button" id="checkCode" class="yzm-bh" onClick="createCode()"  title="点击刷新"/> 
+    </div>
+    <div class="findpwd-li-zs" id="f-m-yzm-1"></div>
+  </div>
+  <div class="findpwd-li">
+    <div class="findpwd-li-xm">短信验证码：</div>
+    <div class="findpwd-li-sr">
+      <input type="text" id="f-p-sid" name="sid"/>
+    </div>
+    <div class="findpwd-li-zs" id="f-p-m-1"><div class="findpwd-li-btn-yzm" > <input type="button" class="yzm" id="f-p-yzm"  value="免费获取验证码"></div></div>
+  </div>
+  <div class="findpwd-li-btn">
+
+   <input type="button" class="login-bg" id="f-p-sub"  value="提交申请"/>
+  </div>
+  </form>
+</div>
+<!--找回密码结束-->
+<script type="text/javascript">
+createCode();
+</script>
+[#include "/footer.html"]
+
+</body>
+</html>

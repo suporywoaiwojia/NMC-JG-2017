@@ -1,0 +1,66 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ 
+<base href="<%=basePath%>"/>  
+<!--<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+<link type="text/css" rel="stylesheet" href="${basePath}css/index.css" />
+-->
+<style>
+
+.nav { width:1530px; margin:auto; text-align:center;}
+.nav ul { list-style:none}
+.nav li { float:left; margin:15px; background-image:url(../images/dh2.png);  height:115px; line-height:115px; font-family:'微软雅黑'}
+.nav a { font-size:18px;}
+
+</style>
+<title>[@dbh_website]${webName}[/@dbh_website]</title>
+
+</head>
+
+<body>
+<div class="logo"></div>
+<div style="clear:both;"></div>
+<div class="nav">
+<ul>
+[@dbh_channel id=11]<a href="${url}" target="_self"><li>首页</li></a>[/@dbh_channel]
+[@dbh_channel id=12]<a href="${url}" target="_self"><li>中心概况</li></a>[/@dbh_channel]
+[@dbh_channel id=13]<a href="${url}" target="_self"><li>最新动态</li></a>[/@dbh_channel]
+[@dbh_channel id=14]<a href="${url}" target="_self"><li>研究项目</li></a>[/@dbh_channel]
+[@dbh_channel id=15]<a href="${url}" target="_self"><li>可研成果</li></a>[/@dbh_channel]
+[@dbh_channel id=16]<a href="${url}" target="_self"><li>学术交流</li></a>[/@dbh_channel]
+[@dbh_channel id=17]<a href="${url}" target="_self"><li>《江格尔》文献</li></a>[/@dbh_channel]
+[@dbh_channel id=18]<a href="${url}" target="_self"><li>《江格尔》说唱艺人</li></a>[/@dbh_channel]
+[@dbh_channel id=19]<a href="${url}" target="_self"><li>田野调查</li></a>[/@dbh_channel]
+[@dbh_channel id=20]<a href="${url}" target="_self"><li>影音频道</li></a>[/@dbh_channel]
+[@dbh_channel id=21]<a href="${url}" target="_self"><li>在线留言</li></a>[/@dbh_channel]
+[@dbh_channel id=22]<a href="${url}" target="_self"><li>联系我们</li></a>[/@dbh_channel]
+
+<div id="msgcount"></div>
+</ul>
+</div>
+</body>
+<script type="text/javascript" src="http://localhost:8080/cms-int/js/sockjs.js"></script>
+        <script>
+            var websocket;
+            if ('WebSocket' in window) {
+                websocket = new WebSocket("ws://localhost:8080/cms-int/webSocketServer");
+            } else if ('MozWebSocket' in window) {
+                websocket = new MozWebSocket("ws://localhost:8080/cms-int/webSocketServer");
+            } else {
+                websocket = new SockJS("http://localhost:8080/cms-int/sockjs/webSocketServer");
+            }
+            websocket.onopen = function (evnt) {
+            };
+            websocket.onmessage = function (evnt) {
+                $("#msgcount").html("(<font color='red'>"+evnt.data+"</font>)")
+            };
+            websocket.onerror = function (evnt) {
+            };
+            websocket.onclose = function (evnt) {
+            }
+ 
+        </script>
+</html>

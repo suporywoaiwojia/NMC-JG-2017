@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+
+<script type="text/javascript" src="../../../js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../../css/main.css">
+<title>会员管理-草原文化数字化创意资源平台</title>
+</head>
+<body>
+[#include "/header.html"]
+<div class="wrap">
+	
+
+	[@dbh_servlet scope="session" name="loginid" var='loginid']
+			[@dbh_member id=loginid var="member"]
+	<div class="ctrl">
+		
+		<ul>
+			
+			<li class="member">
+				个人园地
+			</li>
+			<li class="personalinfo " data-for="xinxi">
+				<a href="${memberUrl}">个人信息</a>
+			</li>
+			<li class="collection" data-for="shoucang">
+				<a href="${favoriteUrl}">收藏记录</a>
+			</li>
+			<li class="watchrecord" data-for="guankan">
+				<a href="${viewUrl}">观看记录</a>
+			</li>
+			<li class="member">
+				会员管理
+			</li>
+			<li class="consumerecord" data-for="xiaofei">
+				<a href="${consumeUrl}">消费记录</a>
+			</li>
+			<li class="paymentrecord current" data-for="jiaofei">
+				<a href="${payUrl} ">缴费记录</a>
+			</li>
+			<li class="paymentrecord" >
+				<a href="http://www.anda9.net/action/re_pay " target="_blank">会员缴费</a>
+			</li>
+		</ul>
+
+	</div>
+	[/@dbh_member]
+[/@dbh_servlet ]
+	<div class="show">
+
+		<div class="showcontent jiaofei" id="jiaofei">
+			<h3>缴费记录</h3>
+			[@dbh_servlet scope="session" name="nickname" var='nickname']
+			<h4>会员名称：<a href="#">${nickname}</a></h4>
+			[/@dbh_servlet]
+			<div class="rows th">
+				<div class="cols cols3 th">订单编号</div>
+				<div class="cols cols4 th">缴费名称</div>
+				<div class="cols cols5 th">缴费日期</div>
+				<div class="cols cols6 th">订单状态</div>
+				<div class="cols cols7 th">缴费金额</div>
+				<div class="cols cols8 th">缴费月数</div>
+				<div class="cols cols9 th">截止日期</div>
+				<div class="clear"></div>
+			</div>
+			[@dbh_member_paylist  count=12 var="cf"]
+			<div class="rows">
+				<div class="cols cols3" title="${cf.orderNum }">${cf.orderNum [0..5]}.</div>
+				<div class="cols cols4">${cf.paymentName}</div>
+				<div class="cols cols5">${cf.paymentDate}</div>
+				<div class="cols cols6">[#if cf.status=="1"]订单成功[#else]订单失败[/#if]</div>
+				<div class="cols cols7">￥${cf.price}</div>
+				<div class="cols cols8">${cf.paymentMonth}</div>
+				<div class="cols cols9">${cf.eTime}</div>
+				<div class="clear"></div>
+			</div>
+			[#assign x=c_Page /]	
+			[#assign y=t_Pages /]
+			[/@dbh_member_paylist]
+			
+
+			
+				[#import "member_common-pagination.ftl" as allBase]
+						[@allBase.pagination listDynamics=0 currentPage=x totalPages=y][/@allBase.pagination]
+			
+			<div class="clear"></div>
+		</div>
+
+	</div>
+	<div class="clear"></div>
+
+
+</div>
+
+
+<script type="text/javascript" src="../../../js/login.js"></script>
+[#include "/footer.html"]
+</body></html>

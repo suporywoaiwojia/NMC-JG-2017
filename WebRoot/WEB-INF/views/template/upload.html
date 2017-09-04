@@ -1,0 +1,409 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    	<title>无标题文档</title>
+		<link type="text/css" rel="stylesheet" href="${basePath}css/global.css" />
+		<link type="text/css" rel="stylesheet" href="${basePath}css/index-v1.1.css" />
+		<link type="text/css" rel="stylesheet" href="${basePath}css/portal.css" />
+		<link type="text/css" rel="stylesheet" href="${basePath}component/js-fileupload/client/css/uploadify.css" />
+		<link type="text/css" rel="stylesheet" href="${basePath}component/artdialog/skins/black.css" /> <script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="${basePath}js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="${basePath}js/login.js"></script>
+		<script type="text/javascript" src="${basePath}component/artdialog/jquery.artDialog.js"></script>
+		<script type="text/javascript" src="${basePath}component/artdialog/artDialog.js"></script>
+		<script type="text/javascript" src="${basePath}component/artdialog/plugins/iframeTools.js"></script>
+	
+		<script type="text/javascript" src="${basePath}component/js-fileupload/client/jquery.uploadify.js"></script>
+		
+		
+		<script type="text/javascript">
+			$(function(){
+				[@dbh_servlet scope="session" name="submessage" var='mes']
+					if('${mes}'!="")
+						art.dialog({content: '${mes}！'});
+				[/@dbh_servlet] 
+				renderUploadButton();
+				$('.saveDoneButton').click(function(){
+					var url = '../action/islogin';
+					window.open(url);
+					$.get(url, function(result){
+						if(result){
+							var fileName = $('#fileName').val();
+							var title = $.trim($('#title').val());
+							if (fileName == ''){
+								art.dialog({content: '请等待文件上传完成...'});
+							} else if (title == ''){
+								art.dialog({content: '请输入标题'});
+							} else {
+								$('#uploadForm').submit();
+							}
+						}else{
+							art.dialog({content: '您还没有登录，请登录之后再尝试操作'});
+						}
+					});
+				});
+			});
+			
+			function renderUploadButton(){
+				$('#upload_video').render({
+					buttonClass: 'video',
+					savePath: 'website\\www\\contentMember\\video\\',
+					httpPath: 'website/www/contentMember/video/',
+					basePath: '${basePath}',
+					componentPath: '${basePath}component/js-fileupload/client/',
+					type: 'video',
+					removeCompleted: false,
+					queueID: 'upload-queue',
+					onUploadStart: function(){
+						$('.upLoadInfo').css('height', 0);
+						$('.miaddleUploadBox').show();
+						$('#imagesList').hide();
+						$('.bottomMessage').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;视频文件已上传，请确认视频信息后，点击保存已完成视频上传。');
+						$('#fileName').val('');
+						$('#filePath').val('');
+						$('#contentType').val('');
+						$('#savePath').val('');
+					},
+					onClearQueue: function(){
+						$('.upLoadInfo').css('height', 'auto');
+						$('.miaddleUploadBox').hide();
+						$('.bottomMessage').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择上传文件类型，跳转至文件信息页后，请填写您所上传的文件信息。');
+						$('#result').attr('src', '${basePath}action/mediaconvert/result');
+					},
+					callback: function(fileElement, fileName, saveFileName, httpFileName){
+						$('#inputFileFullName').val(saveFileName);
+						$('#outputFilePath').val('website\\www\\contentMember\\video\\');
+						$('#contentType').val("4");
+						$('#fileName').val(fileName);
+						$('#filePath').val(httpFileName);
+						$('#savePath').val(saveFileName);
+						
+						$('#convertForm').submit();
+					}
+				});
+				//--图片
+				
+				$('#upload_picture').render({
+					buttonClass: 'picture',
+					savePath: 'website\\www\\contentMember\\image\\',
+					httpPath: 'website/www/contentMember/image/',
+					basePath: '${basePath}',
+					componentPath: '${basePath}component/js-fileupload/client/',
+					type: 'picture',
+					removeTimeout: 0.5,
+					queueID: 'upload-queue',
+					onUploadStart: function(){
+						$('.upLoadInfo').css('height', 0);
+						$('.miaddleUploadBox').show();
+						$('#imagesList').show();
+						$('.bottomMessage').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图片文件已上传，请确认图片信息后，点击保存已完成图片上传。');
+						$('#fileName').val('');
+						$('#filePath').val('');
+						$('#contentType').val('');
+						$('#savePath').val('');
+					},
+					onClearQueue: function(){
+						$('.upLoadInfo').css('height', 'auto');
+						$('.miaddleUploadBox').hide();
+						$('.bottomMessage').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择上传文件类型，跳转至文件信息页后，请填写您所上传的文件信息。');
+						$('#result').attr('src', '${basePath}action/mediaconvert/result');
+					},
+					callback: function(fileElement, fileName, saveFileName, httpFileName){
+						
+						
+						$('#inputFileFullName').val(saveFileName);
+						$('#outputFilePath').val('website\\www\\contentMember\\image\\');
+						$('#contentType').val('2');
+						var imageItem = '<li class="uploadImage" onmouseover="showCover(this)" onmouseout="hideCover(this)">' + 
+							'<img src="'+httpFileName+'" width="127" height="78" style="border:1px solid #ccc;"/><div onclick="delImage(this.parentElement)"></div>' + 
+							fileName+'</li>';
+						$('.uploadAdd').before(imageItem);
+						$('#fileName').val(fileName.substring(0,fileName.lastIndexOf('.')));
+						$('#filePath').val(httpFileName);
+						$('#savePath').val(saveFileName);
+						
+					}
+				});
+				//--音频
+				$('#upload_audio').render({
+					buttonClass: 'audio',
+					savePath: 'website\\www\\contentMember\\audio\\',
+					httpPath: 'website/www/contentMember/audio/',
+					basePath: '${basePath}',
+					componentPath: '${basePath}component/js-fileupload/client/',
+					type: 'audio',
+					removeCompleted: false,
+					queueID: 'upload-queue',
+					onUploadStart: function(){
+						$('.upLoadInfo').css('height', 0);
+						$('.miaddleUploadBox').show();
+						$('#imagesList').hide();
+						$('.bottomMessage').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;音频文件已上传，请确认音频信息后，点击保存已完成音频上传。');
+						$('#fileName').val('');
+						$('#filePath').val('');
+						$('#contentType').val('');
+						$('#savePath').val('');
+					},
+					onClearQueue: function(){
+						$('.upLoadInfo').css('height', 'auto');
+						$('.miaddleUploadBox').hide();
+						$('.bottomMessage').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择上传文件类型，跳转至文件信息页后，请填写您所上传的文件信息。');
+						$('#result').attr('src', '${basePath}action/mediaconvert/result');
+					},
+					callback: function(fileElement, fileName, saveFileName, httpFileName){
+						$('#inputFileFullName').val(saveFileName);
+						$('#outputFilePath').val('website\\www\\contentMember\\audio\\');
+						$('#contentType').val('7');
+						$('#fileName').val(fileName);
+						$('#filePath').val(httpFileName);
+						$('#savePath').val(saveFileName);
+					}
+				});
+				//文件
+				$('#upload_file').render({
+					buttonClass: 'file',
+					savePath: 'website\\www\\contentMember\\document\\',
+					httpPath: 'website/www/contentMember/document/',
+					basePath: '${basePath}',
+					componentPath: '${basePath}component/js-fileupload/client/',
+					type: 'file',
+					removeCompleted: false,
+					queueID: 'upload-queue',
+					onUploadStart: function(){
+						$('.upLoadInfo').css('height', 0);
+						$('.miaddleUploadBox').show();
+						$('#imagesList').hide();
+						$('.bottomMessage').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文档文件已上传，请确认文件信息后，点击保存已完成文件上传。');
+						$('#docName').val('');
+						$('#docPath').val('');
+						$('#contentType').val('');
+						$('#docSavePath').val('');
+					},
+					onClearQueue: function(){
+						$('.upLoadInfo').css('height', 'auto');
+						$('.miaddleUploadBox').hide();
+						$('.bottomMessage').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择上传文件类型，跳转至文件信息页后，请填写您所上传的文件信息。');
+						$('#result').attr('src', '${basePath}action/mediaconvert/result');
+					},
+					callback: function(fileElement, fileName, saveFileName, httpFileName){
+						$('#inputFileFullName').val(saveFileName);
+						$('#outputFilePath').val('website\\www\\contentMember\\document\\');
+						$('#contentType').val('6');
+						$('#docName').val(fileName);
+						$('#docPath').val(httpFileName);
+						$('#docSavePath').val(saveFileName);
+					}
+				});
+				//追加图片
+				$('#upload_picture_append').render({
+					buttonClass: 'picture-append',
+					savePath: 'website\\www\\contentMember\\image\\',
+					httpPath: 'website/www/contentMember/image/',
+					basePath: '${basePath}',
+					componentPath: '${basePath}component/js-fileupload/client/',
+					type: 'picture-append',
+					removeTimeout: 0.5,
+					queueID: 'upload-queue',
+					onUploadStart: function(){
+						//$('#fileName').val('');
+						//$('#filePath').val('');
+						$('#contentType').val('');
+						//$('#savePath').val('');
+					},
+					onClearQueue: function(){
+						$('.upLoadInfo').css('height', 'auto');
+						$('.miaddleUploadBox').hide();
+						$('.bottomMessage').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择上传文件类型，跳转至文件信息页后，请填写您所上传的文件信息。');
+						$('#result').attr('src', '${basePath}action/mediaconvert/result');
+					},
+					callback: function(fileElement, fileName, saveFileName, httpFileName){
+						var imageItem = '<li class="uploadImage" onmouseover="showCover(this)" onmouseout="hideCover(this)">' + 
+							'<img src="'+httpFileName+'" width="127" height="78	" style="border:1px solid #ccc;" /><div onclick="delImage(this.parentElement)"></div>' + 
+							fileName+'<input type="hidden" id="fileName" name="fileName" value="'+fileName.substring(0,fileName.lastIndexOf('.'))+'" /><input type="hidden" id="filePath" name="filePath" value="'+httpFileName+'" /><input type="hidden" id="savePath" name="savePath" value="'+saveFileName+'" /></li>';
+						$('.uploadAdd').before(imageItem);
+						var row=fileElement.parentElement.parentElement;
+						$('#inputFileFullName').val(saveFileName);
+						$('#outputFilePath').val('website\\www\\contentMember\\image\\');
+						$('#contentType').val('2');
+						//$('#fileName').val(fileName);
+						//$('#filePath').val(httpFileName);
+						//$('#savePath').val(saveFileName);
+						
+					}
+				});
+				$("#subContent").click(function(){
+					if($('#title').val()==''){
+						art.dialog({content: "请输入标题", time: 2});
+						$("#title").focus();
+						return false;
+					}
+				
+				$("#userContent").attr("action","${basePath}/action/content/userupload");
+				$("#userContent").submit();
+				});	
+			}
+		    
+		    function showTypeList(){
+		    	var typeList = $('.typeList');
+		    	if(typeList[0].style.display == 'none'){
+		    		$('.typeList').show();
+		    	}else{
+		    		hideTypeList(null);
+		    	}
+		    }
+		    
+		    function hideTypeList(div){
+		    	if(div != null){
+		    		changeTypeList(div);
+		    	}
+		    	$('.typeList').hide();
+		    }
+		    
+		    function changeTypeList(div){
+		    	var typeId = div.id;
+		    	var typeName = div.innerText;
+		    	var url = '${basePath}action/tag/list/'+typeId;
+		    	$.get(url, function(list){
+		    		if(list){
+		    			var typeTag = '';
+		    			var length = list.length;
+		    			for(var i=0; i<length; i++){
+		    				var name = list[i].title;
+		    				var id = list[i].id;
+		    				if($('#'+id).length == 0){
+		    					typeTag += '<input type="button" id="'+id+'" class="labelButton" value="'+name+'" onclick="addTag(this)" />';
+		    				}
+		    			}
+		    			$('.typeButton').html('&nbsp;&nbsp;'+typeName);
+		    			$('.middleLabelNameBox').html(typeTag);
+		    		}
+		    	});
+		    }
+		    
+		    function addTag(btn){
+		    	var id = btn.id;
+		    	var name = btn.value;
+		    	var tag = '<div class="labelChoosed" id="'+id+'" title="'+name+'"><input type="hidden" name="tag" value="'+id+'" />'+name+'<div class="closeButton" onclick="delTag(this.parentElement)">X</div></div>';
+		    	$('.middleLabelNameBox')[0].removeChild(btn);
+		    	$('.thisLabelbox').append(tag);
+		    }
+		    
+		    function delTag(tag){
+		    	var id = tag.id;
+		    	var name = tag.title;
+		    	var btn = '<input type="button" id="'+id+'" class="labelButton" value="'+name+'" onclick="addTag(this)" />';
+		    	$('.thisLabelbox')[0].removeChild(tag);
+		    	$('.middleLabelNameBox').append(btn);
+		    }
+		    
+		    function showCover(li){
+		    	$('div', li).addClass('delPic');
+		    }
+		    
+		    function hideCover(li){
+		    	$('div', li).removeClass('delPic');
+		    }
+		    
+		    function delImage(li) {
+		    	$('.uploadFile')[0].removeChild(li);
+		    }
+			function subContent(){
+			
+				if($('#title').val()==''){
+					art.dialog({content: "请输入标题", time: 2});
+					$("#title").focus();
+					return false;
+				}
+				
+				$("#userContent").attr("action","${basePath}/action/content/userupload");
+				$("#userContent").submit();
+			}
+		</script>
+	</head>
+
+	<body>
+  		<!--  顶部页面的引用  START -->
+		[#include "header.html"]
+	  	<!--  顶部页面的引用  END -->
+		<form  name="userContent" id="userContent" method="post">
+		<input type="hidden" name="contentType" id="contentType"/>
+		<input type="hidden" id="fileName" name="fileName"/>
+		<input type="hidden" id="filePath" name="filePath" />
+  	    <input type="hidden" id="savePath" name="savePath" />
+		<input type="hidden" id="docName" name="docName"/>
+		<input type="hidden" id="docPath" name="docPath"/>
+		<input type="hidden" id="docSavePath" name="docSavePath"/>
+		<div style="clear:both;"></div>
+		<div class="uploadPageBox">
+  	  	  	<div class="upLoadInfo">
+  	  	    	<!-- 上传前  start-->
+  	  	      	<div class="upLoadInfoLeft">
+  	  	      	  	<div class="labelCopy">上传文件，即表示您已同意草原文化创意资源网上传服务条款，请勿上传违法资源！</div>
+  	  	      	  	<div class="uploadButtonBox">
+ 	  	      	  		<div class="uploadButton">
+ 	  	      	  			<span style="float: left;margin:0 5px;"><input type="file" id="upload_video" name="upload_video" /></span>
+							<span style="float: left;margin:0 5px;"><input type="file" id="upload_picture" name="upload_picture" /></span>
+							<span style="float: left;margin:0 5px;"><input type="file" id="upload_audio" name="upload_audio" /></span>
+							<span style="float: left;margin:0 5px;"><input type="file" id="upload_file" name="upload_file" /></span>
+ 	  	      	  		</div>
+  	  	      	  		<ul style="clear: both;height: 40px;">
+	  	  	      	  		<li class="loadFormat"></li>
+  	  	      	  		</ul>
+  	  	      	  	</div>
+  	  	      	</div>
+  	  	      	<!-- 上传前  end -->
+  	  	    </div>
+  	  	    <ul class="messageInfo">
+            	<li class="topMessage"></li>
+                <li class="bottomMessage">选择上传文件类型，跳转至文件信息页后，请填写您所上传的文件信息。
+                </li>
+            </ul>
+    		<div class="miaddleUploadBox" style="display: none;">
+        		<div class="fileFormBox">
+            		<div class="labelTextTitle">标题</div>
+                	<div class="fileInputBox">
+               	  		<input type="text"  id="title" name="title" class="inputText"/>
+                	</div>
+                	<div class="labelTextTitle">分类</div>
+                	<div class="fileInputBox">
+                    	<ul class="typeFile">
+                        	<li class="typeButton" onclick="showTypeList()">&nbsp;&nbsp;选择您想要的分类</li>
+                          	<li class="typeList" style="display: none;">
+                          		[@dbh_tag_type var='tagType']
+	  	  	      	  	  			<div class="typeEG" id="${tagType.id}" onclick="hideTypeList(this)">${tagType.name}</div>
+								[/@dbh_tag_type]	
+                          </li>
+                      	</ul>
+                	</div>
+                	<div class="labelTextTitle">标签</div>
+                	<div class="fileInputBox">
+                		<div class="thisLabelbox"></div>
+                	</div>
+            	</div>
+	            <ul class="labelNameBox">
+	            	<li class="leftLabelNameBox">推荐标签</li>
+	                <li class="middleLabelNameBox"></li>
+	               <a> <li class="rightLabelNameBox" id="subContent"></li></a>
+	            </ul>
+	            <div id="imagesList">
+	            	<div class="lineUpload" ></div>
+		            <ul class="uploadFile">
+		            	<li class="uploadAdd"><input type="file" id="upload_picture_append" name="upload_picture_append" /></li>
+		            </ul>
+		            <div class="lineUpload" ></div>
+	            </div>
+	            <ul class="uploadLoading" id="upload-queue"></ul>
+	            <div style="clear:both;"></div>
+	        </div>
+	    </div>
+			
+		</form>
+	    <form action="${basePath}action/media/convert" method="post" id="convertForm" target="result">
+   	  		<input type="hidden" id="inputFileFullName" name="inputFileFullName" />
+   	  		<input type="hidden" id="outputFilePath" name="outputFilePath" />
+   	  	</form>
+   	  	<iframe id="result" name="result" src="${basePath}action/mediaconvert/result" 
+	  		style="width: 0px;height: 0px; border: 0;overflow:hidden;filter:progid:DXImageTransform.Microsoft.Alpha(0);"></iframe>
+	</body>
+</html>

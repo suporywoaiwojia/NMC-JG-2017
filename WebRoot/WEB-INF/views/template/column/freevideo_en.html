@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+<link href="${basePath}css/pagination.css" rel="stylesheet" type="text/css" media="screen"> 
+<link href="${basePath}css/mfsp-lb.css" rel="stylesheet" type="text/css" media="screen"> 
+
+<script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">
+			$(function(){
+				$('#${columnid}').css('color','#f86400');
+			});
+		</script>
+<title>无标题文档</title>
+
+</head>
+
+<body>
+
+<div class="listcontent">
+	<div  class="2jcol">
+	[@dbh_channel_list parentid=8 var="list" lg='en']
+		<label style="margin-left:20px"><a href="${basePath}action/list_h/${list.id}/en/8/freevideo_en/1" target="_self"  id="${list.id}" >${list.name}</a></label>
+	[/@dbh_channel_list]
+	</div>
+	<div class="list">
+	[@dbh_content_page var='tt' lg='MN']
+	[#if url!=""]
+		<ul style="float:left">
+			<li class="imgbox">
+				<a href="${url}" target="_blank"><img src="${tt.coverPath}"  width="230px" height="145px" style=" border:1px #CCCCCC solid"/></a>
+			</li>
+			<li class="tjtitle">
+				${tt.title}
+			</li>
+			<li class="hits">${hits}&nbsp;</li>
+			<li class="comment">[#if tt.summary?length lte 39] 
+				${tt.summary}
+				[#else] 
+				${tt.summary [0..39]}... 
+				[/#if]</li>
+		</ul>
+		[#else]
+		   	<label  style="text-align:center; width:980px;float:left; margin-top:50px">Sorry!</label>
+			[/#if]
+	[/@dbh_content_page]
+		
+		<div style="float:left; width:980px; vertical-align:middle; margin-top:30px">
+		<table style=" margin:auto;" ><tr><td style="text-align:center">
+		[#import "common-pagination_en.ftl" as allBase]
+						[@allBase.pagination][/@allBase.pagination]
+		</td></tr></table>
+			
+		
+		</div>
+    
+	</div>
+	</div>
+</body>
+</html>
+

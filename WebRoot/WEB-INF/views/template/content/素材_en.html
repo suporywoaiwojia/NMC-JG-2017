@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+[@dbh_content]
+
+<title>[@dbh_website]${webName}[/@dbh_website] - ${content.title}</title>
+<link type="text/css" rel="stylesheet" href="${basePath}css/public.css" />
+<link rel="stylesheet" type="text/css" href="../css/reveal-y.css">
+<link type="text/css" rel="stylesheet" href="${basePath}css/sc.css" />
+<link type="text/css" rel="stylesheet" href="${basePath}css/discussNew.css" />
+<script type="text/javascript" src="${basePath}js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${basePath}js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="${basePath}js/en/login.js"></script>
+<script type="text/javascript" src="${basePath}component/dbhplayer/js/dbh-3.2.12.min2.js"></script> 
+<script type="text/javascript" src="${basePath}component/dbhplayer/js/jquery.tools.min.js"></script>
+<script type="text/javascript" src="../js/jquery.reveal-y.js"></script>
+<script type="text/javascript">
+
+var b=["${content.title}","page/${content.id}.html","${content.coverPath}"];
+
+</script>
+</head>
+<body >
+[#include "/en/header_en.html"]
+<div style="width:980px;margin: 0 auto;">
+<div class="content">
+	<div class="dh"><div class="dhimg"></div>Position : Index[@dbh_bot columnId=content.column.id var="list" lg='en']<a href="${url}" target="_self">${lg_name}</a> > [/@dbh_bot]${content.title}</div>
+		
+	
+	
+	<div>
+	[#list file as f]
+			[#if f_index==0]
+		<div style="margin-top:15px; color:#1b80cf" >Upload Date : ${f.date}</div>
+		
+		<div  style="margin-top:15px;color:#1b80cf" >File Name : ${f.name}</div>
+		[/#if]
+	[/#list]
+		<div  style="margin-top:15px;color:#FF0000">Copyright :Inner Mongolia anda culture media Company</div>
+	</div>
+	<div class="preview"><img src="${content.coverPath}" width="410px" height="410px" /></div>
+
+	<div style="float:left; width:755px">
+		<div class="share" style="width:450px">
+				<div class="bshare-custom"  style="font-size:16px; line-height:26px"><img src="../../images/zan.png" /> Praise <img src="../../images/shoucang1.png"  onclick="favoriteRecord(b)" /> <label onclick="favoriteRecord(b)">Collection</label>
+								<!--<a title="分享到" href="http://www.bShare.cn/" id="bshare-shareto" class="bshare-more">分享到</a> -->
+								<a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+								<a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a>
+								<a title="分享到网易微博" class="bshare-neteasemb"></a>
+								<a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+								<span class="BSHARE_COUNT bshare-share-count">0</span>
+							</div>
+							<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+					
+		</div>
+		<div style="float:right; margin:0 10px 0 65px; line-height:41px">Hits：${hits}</div>
+	</div>
+	[#list file as f]
+			[#if f_index==0]
+	<div class="down">
+		<div  style="margin-bottom:20px; font-size:14px"><strong>Download</strong></div>
+		<div class="downd" onclick="down('${f.id}')"></div>
+		<div class="downl" onclick="down('${f.id}')"></div>
+	</div>
+		[/#if]
+	[/#list]
+	<div class="comment">
+		<div style="width:760px;">
+			
+						[#if content.column.comments!=3]
+						<iframe  id="comment" name="discussFrame" width="100%" frameborder=0  allowtransparency="true" 
+							marginheight=0  marginwidth=0  scrolling="no"  style="z-index:9999" src="${basePath}action/content/comment/en/${content.id}"></iframe>
+						[/#if]
+				
+		</div>
+	</div>
+</div>
+<div class="recommend">
+
+	<div style="font-size:16px; float:left; width:210px"><strong>Recommend >></strong></div>
+	[@dbh_content_list var='dbhlist' parentId=2 count=6 recommend=1 lg='en']
+	<div class="listbox">
+		<ul>
+			<li class="listboximg"><a href="${url}" target="_self"><img src="${dbhlist.coverPath}" /></a></li>
+			<li  class="listboxtxt"><a href="${url}" target="_self">${dbhlist.title}</a></li>
+		</ul>
+		
+	</div>
+	[/@dbh_content_list]
+	
+	
+	<div class="ads">
+	[@dbh_ad id='786']<img src="${filePath}" width="200px" height="200px" />[/@dbh_ad]
+	</div>
+	</div>
+	<div style="clear:both"></div>
+</div>
+<div class="adb">[@dbh_ad id='767']<img src="${filePath}" width="980px" height="100px" />[/@dbh_ad]</div>
+<a href="javascript:;" data-reveal-id="myModal" id="showMyModal" style="display:none;"></a>
+<div id="myModal" class="reveal-modal">
+	<h3 id="al"></h3>
+	<div class="msgbox">
+		<a id="msg"></a>
+		<a id="down" href="#" target="_blank"></a>
+	</div>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+</body>
+${pageView}
+[#include "/footer.html"]
+</html>
+
+[/@dbh_content]

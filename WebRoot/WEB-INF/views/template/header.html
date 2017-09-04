@@ -1,0 +1,193 @@
+
+<link type="text/css" href="${basePath}css/styles.css" rel="stylesheet" />
+<link type="text/css" href="${basePath}css/headerlogin.css" rel="stylesheet" />
+<link rel="stylesheet" href="${basePath}js/login-reveal/reveal.css">
+
+<script type="text/javascript" src="${basePath}js/login-reveal/jquery.reveal.js"></script>
+<script type="text/javascript" src="${basePath}js/jquery.cookie.js"></script>
+<div class="site-nav">
+  <div class="site-nav-bd">
+    <div class="site-nav-bd-l">
+      <img class="g" src="${basePath}images/head/g.png" />
+      <a href="#">收藏本页</a>
+    </div>
+    <div class="site-nav-bd-r">
+	<li class="site-nav-bd-r-menu">
+        <a href="http://tsg.anda9.net"  target="_blank">图书馆网</a>
+      </li>
+      <li class="site-nav-pipe">|</li>
+	  <li class="site-nav-bd-r-menu">
+        <a href="http://child.anda9.net"  target="_blank">幼儿园网</a>
+      </li>
+      <li class="site-nav-pipe">|</li>
+      <li class="site-nav-bd-r-menu">
+        <a href="http://www.anda9.com">关于我们</a>
+      </li>
+      <li class="site-nav-pipe">|</li>
+      <li class="site-nav-bd-r-menu">
+        <a href="#" id="member_pay">会员缴费</a>
+      </li>
+      <li class="site-nav-pipe">|</li>
+	  <li class="site-nav-bd-r-menu">
+        [@dbh_channel id=33 ]<a href="${url}">会员介绍</a>[/@dbh_channel]
+		
+      </li>
+      <li class="site-nav-pipe">|</li>
+      <li class="site-nav-bd-r-menu" id="welcome">
+        您好，欢迎了解蒙古族文化！
+        <span id="headuser">
+          <a href="#" id="link" target="_self" data-reveal-id="myModal">[会员登录]</a>
+          <a href="${basePath}action/register" target="_blank">[会员注册]</a>
+        </span>
+      </li>  
+    </div>
+  </div>
+</div>
+<!--标头区-->
+<div class="header">
+<div class="header-bd">
+    <div class="logo"></div>
+    <div class="input-box">
+      <input class="input-box-s"  placeholder="请输入您想搜索的内容" id="searchInput"></input>
+      <div class="inpur-box-search" id="searchSub"></div>
+    </div>
+    <!--<div class="menu">
+      <li class="menu-upload">
+        <a href="#">上传</a>
+      </li>
+      <li class="up">
+        <img src="${basePath}images/head/up.png" />
+      </li>
+      <li class="menu-history">
+        <a href="http://www.anda9.net/action/member/2/1">观看记录</a>
+      </li>
+    </div>-->
+  </div>  
+</div>
+<!--导航条-->
+<div class="nav">
+  <div class="nav-bd">
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'"><a class="aa" href="http://www.anda9.net">首&nbsp;&nbsp;页</a></div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=2]
+	<a class="aa" href="${url}">人&nbsp;&nbsp;物</a>
+	[/@dbh_channel]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=3]
+	<a class="aa" href="${url}">动&nbsp;&nbsp;物</a>
+	[/@dbh_channel]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=4]
+	<a class="aa" href="${url}">生产生活用具</a>
+	[/@dbh_channel]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=5]
+	<a class="aa" href="${url}">自然美术场景</a>
+	[/@dbh_channel]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=6]
+	<a class="aa" href="${url}">社会美术场景</a>
+	[/@dbh_channel]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=7]
+	<a class="aa" href="${url}">微型剧本</a>
+	[/@dbh_channel]
+	</div>
+    <div class=Off onMouseOut="this.className='Off'" onMouseOver="this.className='up'">
+	[@dbh_channel id=8]
+	<a class="aa" href="${url}">集成产品</a>
+	[/@dbh_channel]
+	</div>
+
+  </div>
+</div>
+ 
+ <!--start-->
+<!-- <div class="main-im">
+	<div id="open_im" class="open-im">&nbsp;</div>  
+	<div class="im_main" id="im_main">
+		<div id="close_im" class="close-im"><a href="javascript:void(0);" title="点击关闭">&nbsp;</a></div>
+		<a href="http://wpa.qq.com/msgrd?v=3&uin=6363067&site=qq&menu=yes" target="_blank" class="im-qq qq-a" title="在线QQ客服">
+			<div class="qq-container"></div>
+			<div class="qq-hover-c"><img class="img-qq" src="${basePath}images/qqkf/qq.png"></div>
+			<span> QQ在线咨询</span>
+		</a>
+		<div class="im-tel">
+			<div>售前咨询热线</div>
+			<div class="tel-num">400-xxx-xxx</div>
+			<div>售后咨询热线</div>
+			<div class="tel-num">0471-xxx</div>
+		</div>
+		<div class="im-footer" style="position:relative">
+			<div class="weixing-container">
+				<div class="weixing-show">
+					<div class="weixing-txt">微信扫一扫<br>关注安达传媒</div>
+					<img class="weixing-ma" src="${basePath}images/qqkf/weixing-ma.jpg">
+					<div class="weixing-sanjiao"></div>
+					<div class="weixing-sanjiao-big"></div>
+				</div>
+			</div>
+			<div class="go-top"><a href="javascript:;" title="返回顶部"></a> </div>
+			<div style="clear:both"></div>
+		</div>
+	</div>
+</div>-->
+ <!--end-->
+ <!--login-->
+ <div id="myModal" class="reveal-modal">
+			<div class="zhezhao"></div>
+				<div class="bg-log">
+				  <div class="error"></div>
+				  <form id="member-login" method="post" >
+				  <table class="tabs1">
+					<tbody>
+					  <tr>
+						<th>账&nbsp;号：</th>
+						<td>
+						  <div class="acountBorder">
+							<input placeholder="请输入登录手机号" class="in-txt" id="loginid" name="loginid" class="login-id">
+						  </div>
+						</td> 
+					  </tr>
+					  <tr>
+						<th>密&nbsp;码：</th>
+						<td>
+						  <div class="acountBorder">
+							<input placeholder="请输入密码" class="in-txt" id="password" name="password" type="password" class="login-pw">
+						  </div>
+						</td> 
+					  </tr>
+					  <tr>
+						<th></th>
+						<td class="itemreglast">
+						  <div class="logauto">
+							<input type="checkbox" id="remember"  name="remember"/><span>记住我</span>
+						  </div>
+						  <div class="logautoright">
+							<a href="${basePath}action/findpassword" target="_blank">找回密码</a>
+							<i class="line"></i>
+							<a href="${basePath}action/register" target="_blank">立即注册</a>
+						  </div>
+						</td> 
+					  </tr>
+					  <tr>
+						<th></th>
+						<td>
+						  <div class="login-k">
+							<a   class="login-bg">登录</a>  
+						  </div>
+						</td> 
+					  </tr>
+					</tbody>
+				  </table>
+				  </form>
+				
+				  <a class="close-reveal-modal">&#215;</a>  
+				</div>
+		
+		</div>

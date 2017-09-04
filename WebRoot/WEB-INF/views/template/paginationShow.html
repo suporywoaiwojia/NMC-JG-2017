@@ -1,0 +1,51 @@
+﻿[#import "common-pagination.ftl" as allBase]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+  <head>
+  		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    	<title>仿QQ分页效果</title>
+    	<script src="../js/jquery-1.3.2.min.js" type="text/javascript"></script>
+		<link href="../css/pagination.css" rel="stylesheet" type="text/css" media="screen"> 
+    	<script type="text/javascript">
+    	
+    		
+    		function pagination(currentPage){		//分页，实际应用中当然需要加入必要的参数的。
+    			var currentPage=currentPage;
+    			var showRecordNum=$("#showRecordNum").val();
+    			
+    		}
+    	</script>
+    	
+  </head>
+ 
+  
+  <body>
+   
+  
+  <div id="show">
+    <table align="center">
+	[@allBase.pagination][/@allBase.pagination]
+	
+    	[@dbh_content_page parentid=2]
+    	[#list dbh_list as sl]
+    	<tr>
+    		<td>${sl.title}</td>
+    		<td></td>
+    	</tr>
+    	[/#list]
+    	[/@dbh_content_page]
+    	
+		[@dbh_tag_list type=4 var='dd']
+		${dd.title}
+		[@dbh_channel id=2]
+		${url} 访问路径
+			${name} 名称
+		[/@dbh_channel]
+		[/@dbh_tag_list]
+    </table>
+  </div>
+
+	
+  </body>
+</html>

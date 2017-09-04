@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>草原文化数字化创意资源平台</title>
+<style type="text/css">
+  @font-face {
+    font-family: Menksoft2007;
+	font-style:  normal;
+    font-weight: normal;
+    src:url("${basePath}mongol/Menksoft2007.woff") format("woff");
+	}
+</style>
+<link type="text/css" href="${basePath}css/mn/styles.css" rel="stylesheet" />
+<base target="_blank" />
+</head>
+<body>
+<!--统一头部开始-->
+<!--标头区-->
+[#include "/mn/header_mn.html"]
+<!--导航条-->
+
+<!--统一头部结束-->
+<!--列表位置开始-->
+<div class="k"></div>
+[#assign columnid=flag /]
+[#include "/mn/list_bot_mn.html"]
+<!--列表位置结束-->
+<div class="fg"></div>
+<div class="k"></div>
+<!--内容开始-->
+
+<div class="content-list">
+  <div class="content-list-l">
+    <div class="mongol_write" style="font-family:Menksoft2007; font-size:18px; font-weight:bold; float:left; color:#013a66;">
+     :  <font color="#FF0000"><strong>${key}</strong></font>
+    </div>
+  </div>
+  
+  <div class="content-list-m">
+  [@dbh_content_page var='list' lg='en']
+  [#if url!=""]
+    <div class="content-list-m-word">
+      <div class="mongol_write" style="font-family:Menksoft2007; font-size:12px; float:left;"><a href="#">
+	  [#if list.title?length lte 20] 
+				
+				${list.title?replace(key,"<font color='#FF0000'>"+key+"</font>")} 
+				[#else] 
+				${list.title[0..20]?replace(key,"<font color='#FF0000'>"+key+"</font>")}...[/#if] 
+	  </a></div>
+    </div>
+    <div class="content-list-m-img">
+      <a href="${url}"><img src="${list.coverPath}"  width="240px" height="160px"/></a>
+    </div>
+    [#else]
+		   <div class="mongol_write" style="font-family:Menksoft2007; font-size:12px; margin-left:30px;margin-top:200px"><a href="#"> <font style="font-size:22px;color:red">   </font></a></div>
+		   [/#if]
+	  [/@dbh_content_page]
+  </div>
+  
+
+  <div class="content-list-r">
+    <div class="page">
+      [#import "common-pagination-mn.ftl" as allBase]
+						[@allBase.pagination][/@allBase.pagination]
+    </div>
+	
+  </div>
+</div>
+<!--内容结束-->
+<div class="k"></div>
+<!--统一底部开始-->
+[#include "/mn/footer_mn.html"]
+<!--统一底部结束-->
+</body>
+
+</html>
